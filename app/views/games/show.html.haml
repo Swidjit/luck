@@ -1,0 +1,29 @@
+.row
+  .large-9.columns
+    %h3
+      =@game.title
+    %p
+      =@game.description
+    .section-container.tabs{"data-section" => ""}
+      %section.section
+        %h5.title
+          %a{:href => "#panel1"} Play the game
+        .content{"data-slug" => "panel1"}
+          %button.radius.button{:type => "submit"} Submit
+      %section.section
+        %h5.title
+          %a{:href => "#panel2"} Comments
+        .content{"data-slug" => "panel2"}
+  .large-3.columns
+    %h4.title Game Stats
+
+    %h5.title Your Stats
+    %h5.title Best Luck
+    %h5.title Worst Luck
+
+
+#mapModal.reveal-modal
+  %h4 Where We Are
+  %p
+    %img{:src => "http://placehold.it/800x600"}/
+  %a.close-reveal-modal{:href => "#"} ×
