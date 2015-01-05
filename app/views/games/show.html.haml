@@ -9,7 +9,7 @@
         %h5.title
           %a{:href => "#panel1"} Play the game
         .content{"data-slug" => "panel1"}
-          %button.radius.button{:type => "submit"} Submit
+          %button.radius.button{:type => "submit", :id=>"submit-score"} Submit
       %section.section
         %h5.title
           %a{:href => "#panel2"} Comments
@@ -22,8 +22,13 @@
     %h5.title Worst Luck
 
 
-#mapModal.reveal-modal
-  %h4 Where We Are
-  %p
-    %img{:src => "http://placehold.it/800x600"}/
-  %a.close-reveal-modal{:href => "#"} ×
+:javascript
+  $(document).ready(function(){
+      $('#submit-score').click(function(){
+        var data = {
+            score: 10
+        }
+        $.post('/games/1/save_score', data);
+      });
+  });
+
