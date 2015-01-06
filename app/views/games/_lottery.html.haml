@@ -1,72 +1,90 @@
-#spinner_01.spinner.ridged.white_shadow.shadow{:value => "10"}
-#spinner_02.spinner.ridged.white_shadow.shadow{:value => "10"}
-#spinner_03.spinner.ridged.white_shadow.shadow{:value => "10"}
-#spinner_04.spinner.ridged.white_shadow.shadow{:value => "10"}
-#spinner_05.spinner.ridged.white_shadow.shadow{:value => "10"}
+#spinners
+  #spinner_01.spinner.ridged.white_shadow.shadow{:value => "8"}
+  #spinner_02.spinner.ridged.white_shadow.shadow{:value => "8"}
+  #spinner_03.spinner.ridged.white_shadow.shadow{:value => "8"}
+  #spinner_04.spinner.ridged.white_shadow.shadow{:value => "8"}
+  #spinner_05.spinner.ridged.white_shadow.shadow{:value => "8"}
 .clear
 %button.radius.button{:type => "submit", :id=>"submit-lottery"} Submit Numbers
 
+#entry
+  .lottery.red
+    %span
+  .lottery.red
+    %span
+  .lottery.red
+    %span
+  .lottery.red
+    %span
+  .lottery.red
+    %span
 #results
-  .lottery.result
-
-  .lottery.result
-
-  .lottery.result
-
-  .lottery.result
-
-  .lottery.result
-
+  .lottery.blue-green
+    %span
+  .lottery.blue-green
+    %span
+  .lottery.blue-green
+    %span
+  .lottery.blue-green
+    %span
+  .lottery.blue-green
+    %span
 :javascript
-  var game_id = 1;
-  $('#submit-lottery').click(function(){
-    $(this).remove();
-    var guesses = [];
-    var answers = [];
-    $('.spinner').each(function() {
-      guesses.push(parseInt($(this).attr('value')));
-    });
-    console.log(guesses);
+  $(document).on('ready page:load', function(){
+    var game_id = 1;
+    $('#submit-lottery').click(function(){
+      $(this).remove();
 
-    var speed = 1000;
-    var timer = setInterval(replaceArticle, speed);
+      var guesses = [];
+      var answers = [];
+      var nums = $('#entry').children();
+      $('.spinner').each(function(key, value) {
+        guesses.push(parseInt($(this).attr('value')));
+        nums.eq(key).children().html($(this).attr('value'));
+        nums.eq(key).css("display","inline");
+      });
+      $('#spinners').remove();
 
-    var divs =  $('#results').children();
-    var length = divs.length;
-    console.log(length);
-    var index = 0;
-    function replaceArticle() {
-         divs.eq(index).css("display","inline");
-         var num = Math.floor((Math.random() * 20) + 1);
-         divs.eq(index).text(num);
-         answers.push(parseInt(num));
-         if(index==1) {
-            $('.game-score').css("display","block");
-         }
-         index++;
+      var speed = 1000;
+      var timer = setInterval(replaceArticle, speed);
 
-         // remove timer after interating through all divs
-         if (index >= length) {
-             clearInterval(timer);
-              var matches = 0;
-              $.each( answers, function( key, value ) {
-                var index = $.inArray( value, guesses );
-                if( index != -1 ) {
-                    matches++;
+      var divs =  $('#results').children();
+      var length = divs.length;
+      console.log(length);
+      var index = 0;
+      function replaceArticle() {
+           divs.eq(index).css("display","inline");
+           var num = Math.floor((Math.random() * 15) + 1);
+           divs.eq(index).children().text(num);
+           answers.push(parseInt(num));
+           if(index==1) {
+              $('.game-score').css("display","block");
+           }
+           index++;
+
+           // remove timer after interating through all divs
+           if (index >= length) {
+               clearInterval(timer);
+                var matches = 0;
+                $.each( answers, function( key, value ) {
+                  var index = $.inArray( value, guesses );
+                  if( index != -1 ) {
+                      console.log(guesses);
+                      matches++;
+                      guesses.splice(index,1);
+                      console.log(guesses);
+                  }
+                });
+                var score = Math.pow(2,matches);
+                if(matches==0) score = 0;
+                console.log("score: " + score);
+                console.log("matches: " + matches);
+                var data = {
+                  score: score
                 }
-              });
-              var score = Math.pow(2,matches);
-              if(matches==0) score = 0;
-              console.log("score: " + score);
-              console.log("matches: " + matches);
-              var data = {
-                score: score
-              }
-              $.post('/games/'+game_id+'/save_score', data);
-         }
+                $.post('/games/'+game_id+'/save_score', data);
+           }
 
-    }
-
-
-
+      }
+    });
   });

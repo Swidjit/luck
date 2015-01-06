@@ -19,7 +19,9 @@
 
 @import 'foundation-icons';
 
-
+$dark-blue: #35404F;
+$red: #E45F56;
+$blue-green: #4AAAA5;
 .blue {
 	background-color: #7ACCC8 !important;
 }
@@ -89,22 +91,28 @@
 }
 .game-score {
 	font-size: 1.5em;
-	background-color: #c0c;
+	background-color: $blue-green;
 	padding: 3px 7px;
-	color: #333;
 	display:none;
 }
 .score-value, .score-label {
 	display:inline;
-	color: #000;
+	color: $dark-blue;
 }
 .lottery {
 	display: none;
-	padding: 10px;
 	font-size: 2.5em;
 	line-height: 1.8em;
 	font-family: 'Oswald', sans-serif;
-	margin: 0 33px;
+	padding: 0 7px;
+	margin-right: 6px;
+
+	span {
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+    color: $dark-blue;
+	}
 }
 
 .col-33 {

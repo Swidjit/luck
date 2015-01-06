@@ -33,10 +33,10 @@ $.fn.hasAttr = function(name) {
         // min/max LI list
         var numLIs = "";
         var label;
-        var max = 20; // default
+        var max = 15; // default
         var zeros = true;
         var increment = 1.0;
-        var startingValue = 0.0;
+        var startingValue = 1.0;
         if($(this).attr('zero_padded') == 'false') zeros = false;
         if($(this).hasAttr('increment')){
           increment = $(this).attr('increment');
@@ -57,12 +57,12 @@ $.fn.hasAttr = function(name) {
           if((!zeros) || (i > 99)){
             label = "<span>"+iValue+"</span>";
           }else if(i<1){
-            label = "<span>000</span><span></span>";
+            label = "<span>00</span><span></span>";
           }else{
             if(i<10){
-              label = "<span>00</span><span>"+iValue+"</span>";
-            }else if(i<100){
               label = "<span>0</span><span>"+iValue+"</span>";
+            }else if(i<100){
+              label = "<span>"+iValue+"</span>";
             }
             // in first condition above
           }
