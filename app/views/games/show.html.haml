@@ -20,15 +20,16 @@
         .content{"data-slug" => "panel2"}
   .large-3.columns
     %h4.title Game Stats
-    .stats-box.dark-blue
-      %h3 Your Stats
-      .stat-label your score
-      .stat-data
-        =@user_ranking.score
-      .clear
-      .stat-label your percentile
-      .stat-data
-        ="#{@user_ranking.percentile}%"
+    -if @user_ranking.present?
+      .stats-box.dark-blue
+        %h3 Your Stats
+        .stat-label your score
+        .stat-data
+          =@user_ranking.score
+        .clear
+        .stat-label your percentile
+        .stat-data
+          ="#{@user_ranking.percentile}%"
     .stats-box.dark-blue
       %h5.title Best Luck
       -@best.each do |r|

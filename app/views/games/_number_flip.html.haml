@@ -1,15 +1,30 @@
-.flip-container
-  .creation
-    .front
-      .cont
-        %p
-          %span.details Front
-    .back
-      .cont
-        %p
-          %span.details Back
+%div{:style=>"position:relative;"}
+  -@values.each do |v|
+    .flip-container{:value=>v}
+      .creation
+        .front
+          .cont
+            %p
+              %span.details flip me
+        .back
+          .cont
+            %p
+              %span.details
+                =v
 
 :javascript
+    var game_id = 2;
+    var flip_count = 0;
+    var score = 0;
      $('.flip-container').on('click', function() {
-        $(this).children().toggleClass('flipped');
+        $(this).children().addClass('flipped');
+        flip_count++;
+        score += parseInt($(this).attr('value'));
+        if(flip_count == 3) {
+          var data = {
+            score: score
+          }
+          $.post('/games/'+game_id+'/save_score', data);
+        }
+
       });

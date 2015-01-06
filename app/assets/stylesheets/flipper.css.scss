@@ -1,21 +1,18 @@
 /* entire container, keeps perspective */
 .flip-container {
-  position:absolute;
-  left:50%;
-  top:50%;
-  margin-top:-50px;
-  margin-left:-50px;
+  margin: 0 5px;
   -webkit-perspective:1200;
   -moz-perspective:1200;
   perspective:1200;
+  display: inline-block;
 }
 .flipped {
   -webkit-transform:rotateY(180deg);
   -moz-transform:rotateY(180deg);
 }
 .creation {
-  width:100px;
-  height:100px;
+  width:80px;
+  height:80px;
   float:left;
   -webkit-transition:all 0.6s;
   -moz-transition:all 0.6s;
@@ -43,12 +40,10 @@
   display:block;
   width:auto;
   text-align:center;
-  line-height:80px;
+  line-height:60px;
   margin:0 px;
   font-size:20px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 .creation p span {
   vertical-align:middle;
@@ -58,8 +53,8 @@
 .cont {
   border-radius:50%;
   background-color:#ddd;
-  width:92px;
-  height:92px;
+  width:80px;
+  height:80px;
   display:inline-block;
   border:8px solid #1abc9c;
 }
