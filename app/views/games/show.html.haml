@@ -7,7 +7,13 @@
     .section-container.tabs{"data-section" => ""}
       %section.section
         .content{"data-slug" => "panel1"}
-          =render :partial => 'lottery'
+          -case @game.id
+          -when 1
+            =render :partial => 'lottery'
+          -when 2
+            =render :partial => 'number_flip'
+          -when 3
+            =render :partial => 'next_in_line'
       %section.section
         %h5.title
           %a{:href => "#panel2"} Comments
