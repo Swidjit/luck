@@ -1,0 +1,9 @@
+%button.radius.button{:type => "submit", :id=>"submit"} Make Your Move
+%button.radius.button{:style=>"display:none;", :id=>"response"}
+:javascript
+  $('#submit').click(function(){
+    $('#submit').remove();
+    $('#response').css("display","block");
+    $('.game-score').css('display','block');
+    $.get('/games/spot_value');
+  });
