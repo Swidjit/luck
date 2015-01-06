@@ -9,7 +9,7 @@ class GamesController < ApplicationController
 
   def save_score
     @score = params[:score]
-    @score = Score.new(:game=>@game, :user=>current_user, :value=>params[:score],:game_num => @game.game_count)
+    @score = Score.new(:game=>@game, :user=>current_user, :value=>params[:score],:game_num => @game.game_num)
     if @score.save!
       @game_stat = GameStat.where(:game_id => @score.game.id, :user_id => current_user.id).first
       if @game_stat.present?
