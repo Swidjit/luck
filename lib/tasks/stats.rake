@@ -4,7 +4,6 @@ namespace :stats do
     @games = Game.all
     @games.each do |game|
       @avg = GameStat.where(:game_id => game.id).average(:avg)
-      puts @avg
       game.avg = @avg
       game.increment!(:plays)
     end
@@ -17,15 +16,17 @@ namespace :stats do
     data = GameStat.all.collect(&:avg)
     dev = data.standard_deviation
     @games = Game.all
-    @games.each dp |game|
+    @games.each do |game|
       User.all.each do |user|
         stat = GameStat.where(:game_id => game.id, :user_id => user.id).first
-        score_diff = stat.avg - data.mean
-        num_devs = score_diff/dev.to_f
-        stat_score = 500 + (100*num_devs)
-        percentile = data.percentile_rank(stat.avg)
-        @rank = Ranking.new(:user_id=> user.id, :game_id => game.id, :score => stat_score.round(2), :percentile => percentile.round(2))
-        @rank.save
+        if stat.present?
+          score_diff = stat.avg - data.mean
+          num_devs = score_diff/dev.to_f
+          stat_score = 500 + (100*num_devs)
+          percentile = data.percentile_rank(stat.avg)
+          @rank = Ranking.new(:user_id=> user.id, :game_id => game.id, :score => stat_score.round(2), :percentile => percentile.round(2))
+          @rank.save
+        end
       end
     end
 

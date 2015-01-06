@@ -31,7 +31,9 @@ class GamesController < ApplicationController
       end
       @game_stat.save
 
-      respond_with @game
+      respond_to do |format|
+        format.js {render 'score_saved'}
+      end
     end
   end
 

@@ -20,6 +20,11 @@
         $(this).children().addClass('flipped');
         flip_count++;
         score += parseInt($(this).attr('value'));
+        $('.score-value').text(score);
+        if(flip_count == 1) {
+          $('.game-score').css("display","block");
+        }
+
         if(flip_count == 3) {
           var data = {
             score: score

@@ -84,8 +84,20 @@
   clear: both;
   margin-right: 15px;
 }
-
-
+.completion-message{
+	display: none;
+}
+.game-score {
+	font-size: 1.5em;
+	background-color: #c0c;
+	padding: 3px 7px;
+	color: #333;
+	display:none;
+}
+.score-value, .score-label {
+	display:inline;
+	color: #000;
+}
 .lottery {
 	display: none;
 	padding: 10px;

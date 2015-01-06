@@ -40,6 +40,9 @@
          var num = Math.floor((Math.random() * 20) + 1);
          divs.eq(index).text(num);
          answers.push(parseInt(num));
+         if(index==1) {
+            $('.game-score').css("display","block");
+         }
          index++;
 
          // remove timer after interating through all divs

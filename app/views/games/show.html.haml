@@ -1,7 +1,13 @@
 .row
   .large-9.columns
-    %h3
-      =@game.title
+    .row
+      .large-6.columns
+        %h3
+          =@game.title
+      .large-6.columns
+        .game-score.right
+          .score-label Score:
+          .score-value 0
     %p
       =@game.description
     .section-container.tabs{"data-section" => ""}
@@ -14,6 +20,10 @@
             =render :partial => 'number_flip'
           -when 3
             =render :partial => 'next_in_line'
+          .completion-message
+            .alert-box.success.radius{"data-alert" => ""}
+              Your score is saved. Stats and ranking are updated hourly. You may play this game again in 3 hours
+              %a.close{:href => "#"} &times;
       %section.section
         %h5.title
           %a{:href => "#panel2"} Comments
