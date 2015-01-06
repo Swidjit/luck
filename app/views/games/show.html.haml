@@ -2,13 +2,13 @@
   .large-9.columns
     .row
       .large-6.columns
-        %h3
+        %h3.game-title
           =@game.title
       .large-6.columns
         .game-score.right
           .score-label Score:
           .score-value 0
-    %p
+    .game-desc
       =@game.description
     .section-container.tabs{"data-section" => ""}
       %section.section
@@ -29,10 +29,10 @@
           %a{:href => "#panel2"} Comments
         .content{"data-slug" => "panel2"}
   .large-3.columns
-    %h4.title Game Stats
+
     -if @user_ranking.present?
-      .stats-box.dark-blue
-        %h3 Your Stats
+      .stats-box
+        %h5 Your Stats
         .stat-label your score
         .stat-data
           =@user_ranking.score
@@ -40,12 +40,12 @@
         .stat-label your percentile
         .stat-data
           ="#{@user_ranking.percentile}%"
-    .stats-box.dark-blue
+    .stats-box
       %h5.title Best Luck
       -@best.each do |r|
         .stat-label=User.find(r.user_id).email
         .stat-data=r.score
-    .stats-box.dark-blue
+    .stats-box
       %h5.title Worst Luck
       -@worst.each do |r|
         .stat-label=User.find(r.user_id).email

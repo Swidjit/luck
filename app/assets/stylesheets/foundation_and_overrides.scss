@@ -116,11 +116,11 @@ $font-weight-bold: bold !default;
 // $black       : #000000;
 
 // We use these as default colors throughout
-$primary-color: #008CBA;
-$secondary-color: #e7e7e7;
-$alert-color: #f04124;
-$success-color: #43AC6A;
-$warning-color: #f08a24;
+$primary-color: #4AAAA5;
+$secondary-color: #35404F;
+$alert-color: #E45F56;
+$success-color: #A3D39C;
+$warning-color: #E45F56;
 $info-color: #a0d3e8;
 
 // We use these to control various global styles
@@ -423,8 +423,8 @@ $info-color: #a0d3e8;
 // We use these to build padding for buttons.
 $button-tny: rem-calc(10);
 $button-sml: rem-calc(14);
-$button-med: rem-calc(7);
-$button-lrg: rem-calc(9);
+$button-med: rem-calc(8);
+$button-lrg: rem-calc(10);
 
 // We use this to control the display property.
 // $button-display: inline-block;
@@ -436,7 +436,7 @@ $button-lrg: rem-calc(9);
 // $button-font-color-alt: $oil;
 // $button-font-tny: rem-calc(11);
 // $button-font-sml: rem-calc(13);
-// $button-font-med: rem-calc(16);
+$button-font-med: rem-calc(18);
 // $button-font-lrg: rem-calc(20);
 $button-font-weight: $font-weight-bold;
 // $button-font-align: center;
@@ -1364,7 +1364,7 @@ $button-bg-color: $primary-color;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
+$topbar-bg-color: $secondary-color;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1372,8 +1372,8 @@ $button-bg-color: $primary-color;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
-// $topbar-title-weight: $font-weight-normal;
-// $topbar-title-font-size: rem-calc(17);
+$topbar-title-weight: $font-weight-bold;
+$topbar-title-font-size: rem-calc(20);
 
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: $oil;
@@ -1404,7 +1404,7 @@ $button-bg-color: $primary-color;
 // $topbar-back-link-size: $h5-font-size;
 // $topbar-link-dropdown-padding: 20px;
 
-// $topbar-button-font-size: 0.75rem;
+$topbar-button-font-size: 1rem;
 // $topbar-button-top: 7px;
 
 // $topbar-dropdown-label-color: $monsoon;

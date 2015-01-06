@@ -12,10 +12,14 @@
   %section.top-bar-section
     -if user_signed_in?
       %ul.right
-        %li.has-form
-          =link_to 'Play Games', games_path
-        %li.has-form
-          %a.button{:href => "http://foundation.zurb.com/docs"} View Results
+        %li.has-form{:style => 'padding-right: 3px !important;'}
+          =link_to games_path, :class=>'button header-button' do
+            %i.fi-play
+            Play Games
+        %li.has-form{:style => 'padding-right: 3px !important;'}
+          =link_to games_path, :class=>'button header-button' do
+            %i.fi-crown
+            Leaderboard
         %li.has-dropdown
           %a{:href => "#"} Username
           %ul.dropdown

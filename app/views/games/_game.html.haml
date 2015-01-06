@@ -1,7 +1,8 @@
 %img{:src => "assets/#{game.logo_url}"}/
-%h4=game.title
-%p=game.description
+%h4.game-title=game.title
+.game-desc
+  =game.description
 =link_to game_path(game.id) do
-  %button.hint--bottom.selected-filter{"data-hint" => "Seguidos", :type => "submit"}
+  %button{:type => "submit"}
     %i.button-icon.fi-play
     .button-text Play #{game.title}

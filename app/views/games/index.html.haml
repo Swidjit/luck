@@ -1,3 +1,5 @@
--@games.each do |game|
-  .col-33
-    =render game
+.row
+  .large-12.columns
+    -@games.each do |game|
+      .col-33
+        =render game

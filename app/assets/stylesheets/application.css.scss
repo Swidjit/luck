@@ -22,6 +22,7 @@
 $dark-blue: #35404F;
 $red: #E45F56;
 $blue-green: #4AAAA5;
+$light-gray: rgba(53, 64, 79, 0.71);
 .blue {
 	background-color: #7ACCC8 !important;
 }
@@ -49,8 +50,19 @@ $blue-green: #4AAAA5;
 	background-color: #c8cbcf !important;
 }
 
+p {
+  color: rgba(53, 64, 79, 0.71);
+}
+
 .button-icon {
 	font-size: 3em;
+	color: white;
+}
+
+i {
+  color: $dark-blue;
+  margin-right: 4px;
+  font-size: 1.1em;
 }
 
 .button-text {
@@ -59,16 +71,22 @@ $blue-green: #4AAAA5;
 	position: relative;
 	top: -.5em;
 	padding-left: .5em;
+	color: white;
 }
-
+.header-button {
+  font-size: 1.1em !important;
+  padding-left:12px !important;
+  padding-right:12px !important;
+  top: 5px !important;
+}
 .stats-box {
   min-height: 120px;
-  color: #eee;
   h3{
     font-size: 20px;
     font-weight: bold;
     opacity: .5;
     margin-bottom: 10px;
+    color: $dark-blue;
   }
   a {
     color: #8BC9C5;
@@ -78,9 +96,11 @@ $blue-green: #4AAAA5;
   }
   padding: 6px 10px;
   margin-bottom: 10px;
+  background-color: $light-gray;
 }
 .stat-label, .stat-data {
   display: inline;
+  color: rgba(250, 244, 244, 0.87);
 }
 .stat-label {
   clear: both;
@@ -88,6 +108,15 @@ $blue-green: #4AAAA5;
 }
 .completion-message{
 	display: none;
+}
+.game-title {
+  color: $dark-blue;
+  font-weight: bold;
+}
+.game-desc, .game-inst {
+  color: $dark-blue;
+  font-size: 1.1em;
+  margin-bottom: 10px;
 }
 .game-score {
 	font-size: 1.5em;
