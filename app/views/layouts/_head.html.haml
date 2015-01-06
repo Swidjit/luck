@@ -12,14 +12,10 @@
   %section.top-bar-section
     -if user_signed_in?
       %ul.right
-        %li
-          .icon-bar.three-up{:style=>"display:block"}
-            %a.item
-              %i.fi-play
-            %a.item
-              %i.fi-crown
-            %a.item
-              %i.fi-torso-female
+        %li.has-form
+          =link_to 'Play Games', games_path
+        %li.has-form
+          %a.button{:href => "http://foundation.zurb.com/docs"} View Results
         %li.has-dropdown
           %a{:href => "#"} Username
           %ul.dropdown
