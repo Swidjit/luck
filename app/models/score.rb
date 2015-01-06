@@ -3,7 +3,7 @@ class Score < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
 
-  validates :value, :uniqueness => {:scope => [:user, :game, :game_num]}
+  # validates :value, :uniqueness => {:scope => [:user, :game, :game_num]}
   # acts_as_commentable
 
 end

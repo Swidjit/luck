@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105225233) do
+ActiveRecord::Schema.define(version: 20150106031936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_stats", force: true do |t|
+    t.float   "avg"
+    t.integer "total"
+    t.integer "plays"
+    t.integer "user_id"
+    t.integer "game_id"
+  end
 
   create_table "games", force: true do |t|
     t.string   "title"
@@ -28,10 +36,11 @@ ActiveRecord::Schema.define(version: 20150105225233) do
   create_table "scores", force: true do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.string   "value",      default: "0"
     t.integer  "game_num"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "value",        default: 0
+    t.datetime "process_time"
   end
 
   create_table "users", force: true do |t|

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  avg: 1.5
+  total: 1
+  plays: 1
+
+two:
+  avg: 1.5
+  total: 1
+  plays: 1
