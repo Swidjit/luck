@@ -8,7 +8,6 @@
       %section.section
         .content{"data-slug" => "panel1"}
           =render :partial => 'lottery'
-          %button.radius.button{:type => "submit", :id=>"submit-score"} Submit
       %section.section
         %h5.title
           %a{:href => "#panel2"} Comments
@@ -34,14 +33,4 @@
       -@worst.each do |r|
         .stat-label=User.find(r.user_id).email
         .stat-data=r.score
-
-:javascript
-  $(document).ready(function(){
-      $('#submit-score').click(function(){
-        var data = {
-            score: 76
-        }
-        $.post('/games/1/save_score', data);
-      });
-  });
 

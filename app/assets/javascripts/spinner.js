@@ -11,10 +11,6 @@ $(document).ready(function(){
 $.fn.hasAttr = function(name) {
    return this.attr(name) !== undefined;
 };
-
-
-
-
     $('.spinner')
       .each(function (index) {
         $(this).html('<div><ul></ul></div>');
@@ -37,7 +33,7 @@ $.fn.hasAttr = function(name) {
         // min/max LI list
         var numLIs = "";
         var label;
-        var max = 100; // default
+        var max = 20; // default
         var zeros = true;
         var increment = 1.0;
         var startingValue = 0.0;

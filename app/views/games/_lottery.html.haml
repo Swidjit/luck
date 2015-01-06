@@ -1,5 +1,69 @@
-#spinner_01.spinner.ridged.white_shadow.shadow{:value => "90"}
-#spinner_02.spinner.ridged.white_shadow.shadow{:value => "90"}
-#spinner_03.spinner.ridged.white_shadow.shadow{:value => "90"}
-#spinner_04.spinner.ridged.white_shadow.shadow{:value => "90"}
-#spinner_05.spinner.ridged.white_shadow.shadow{:value => "90"}
+#spinner_01.spinner.ridged.white_shadow.shadow{:value => "10"}
+#spinner_02.spinner.ridged.white_shadow.shadow{:value => "10"}
+#spinner_03.spinner.ridged.white_shadow.shadow{:value => "10"}
+#spinner_04.spinner.ridged.white_shadow.shadow{:value => "10"}
+#spinner_05.spinner.ridged.white_shadow.shadow{:value => "10"}
+.clear
+%button.radius.button{:type => "submit", :id=>"submit-lottery"} Submit Numbers
+
+#results
+  .lottery.result
+
+  .lottery.result
+
+  .lottery.result
+
+  .lottery.result
+
+  .lottery.result
+
+:javascript
+  var game_id = 1;
+  $('#submit-lottery').click(function(){
+    $(this).remove();
+    var guesses = [];
+    var answers = [];
+    $('.spinner').each(function() {
+      guesses.push(parseInt($(this).attr('value')));
+    });
+    console.log(guesses);
+
+    var speed = 1000;
+    var timer = setInterval(replaceArticle, speed);
+
+    var divs =  $('#results').children();
+    var length = divs.length;
+    console.log(length);
+    var index = 0;
+    function replaceArticle() {
+         divs.eq(index).css("display","inline");
+         var num = Math.floor((Math.random() * 20) + 1);
+         divs.eq(index).text(num);
+         answers.push(parseInt(num));
+         index++;
+
+         // remove timer after interating through all divs
+         if (index >= length) {
+             clearInterval(timer);
+              var matches = 0;
+              $.each( answers, function( key, value ) {
+                var index = $.inArray( value, guesses );
+                if( index != -1 ) {
+                    matches++;
+                }
+              });
+              var score = Math.pow(2,matches);
+              if(matches==0) score = 0;
+              console.log("score: " + score);
+              console.log("matches: " + matches);
+              var data = {
+                score: score
+              }
+              $.post('/games/'+game_id+'/save_score', data);
+         }
+
+    }
+
+
+
+  });
