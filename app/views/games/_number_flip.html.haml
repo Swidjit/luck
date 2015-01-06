@@ -1,0 +1,16 @@
+.flip-container
+  .creation
+    .front
+      .cont
+        %p
+          %span.details Front
+    .back
+      .cont
+        %p
+          %span.details Back
+
+:javascript
+     $('.flip-container').on('click', function() {
+        $(this).children().toggleClass('flipped');
+        alert($(this).find('flipper'));
+      });

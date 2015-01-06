@@ -6,9 +6,8 @@
       =@game.description
     .section-container.tabs{"data-section" => ""}
       %section.section
-        %h5.title
-          %a{:href => "#panel1"} Play the game
         .content{"data-slug" => "panel1"}
+          =render :partial => 'number_flip'
           %button.radius.button{:type => "submit", :id=>"submit-score"} Submit
       %section.section
         %h5.title
