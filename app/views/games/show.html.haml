@@ -16,11 +16,25 @@
         .content{"data-slug" => "panel2"}
   .large-3.columns
     %h4.title Game Stats
-
-    %h5.title Your Stats
-    %h5.title Best Luck
-    %h5.title Worst Luck
-
+    .stats-box.dark-blue
+      %h3 Your Stats
+      .stat-label your score
+      .stat-data
+        =@user_ranking.score
+      .clear
+      .stat-label your percentile
+      .stat-data
+        ="#{@user_ranking.percentile}%"
+    .stats-box.dark-blue
+      %h5.title Best Luck
+      -@best.each do |r|
+        .stat-label=User.find(r.user_id).email
+        .stat-data=r.score
+    .stats-box.dark-blue
+      %h5.title Worst Luck
+      -@worst.each do |r|
+        .stat-label=User.find(r.user_id).email
+        .stat-data=r.score
 
 :javascript
   $(document).ready(function(){

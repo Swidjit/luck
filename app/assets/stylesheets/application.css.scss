@@ -18,6 +18,34 @@
 
 @import 'foundation-icons';
 
+
+.blue {
+	background-color: #7ACCC8 !important;
+}
+.blue-green {
+	background-color: #4AAAA5 !important;
+}
+.red {
+	background-color: #E45F56 !important;
+}
+.light-red {
+	background-color: #EC918A !important;
+}
+
+.light-blue {
+	background-color: #8BC9C5 !important;
+}
+
+.green {
+	background-color: #A3D39C !important;
+}
+.dark-blue {
+	background-color: #35404F !important;
+}
+.light-gray {
+	background-color: #c8cbcf !important;
+}
+
 .button-icon {
 	font-size: 3em;
 }
@@ -28,4 +56,30 @@
 	position: relative;
 	top: -.5em;
 	padding-left: .5em;
+}
+
+.stats-box {
+  min-height: 120px;
+  color: #eee;
+  h3{
+    font-size: 20px;
+    font-weight: bold;
+    opacity: .5;
+    margin-bottom: 10px;
+  }
+  a {
+    color: #8BC9C5;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+.stat-label, .stat-data {
+  display: inline;
+}
+.stat-label {
+  clear: both;
+  margin-right: 15px;
 }

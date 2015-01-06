@@ -2,7 +2,9 @@ class GamesController < ApplicationController
   respond_to :html
   before_filter :load_resource_from_id, :except => []
   def show
-
+    @user_ranking = Ranking.where(:game_id => params[:id], :user_id => current_user.id).first
+    @best = Ranking.where(:game_id => params[:id]).order(:score).limit(10)
+    @worst = Ranking.where(:game_id => params[:id]).order(score: :desc).limit(10)
     # @comments = @game.comment_threads.order('created_at desc')
     # @new_comment = Comment.build_from(@game, current_user.id, "") if user_signed_in?
   end
