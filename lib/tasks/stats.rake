@@ -9,6 +9,16 @@ namespace :stats do
     end
   end
 
+  desc "calculate user overall scores"
+  task :calculate_user_averages => :environment do
+    @users = User.all
+    @users.each do |user|
+      user.score = Ranking.where(:user => user).average(:score)
+      user.percentile = Ranking.where(:user => user).average(:percentile)
+      user.save
+    end
+  end
+
   desc "do stat analysis"
   task :analyze => :environment do
     require 'descriptive_statistics'
