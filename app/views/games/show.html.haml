@@ -47,13 +47,15 @@
     .stats-box
       %h5.title Best Luck
       -@best.each do |r|
-        .stat-label=User.find(r.user_id).email
+        .stat-label=User.find(r.user_id).username
         .stat-data=r.score
+        .clear
     .stats-box
       %h5.title Worst Luck
       -@worst.each do |r|
-        .stat-label=User.find(r.user_id).email
+        .stat-label=User.find(r.user_id).username
         .stat-data=r.score
+        .clear
 
 #myModal.reveal-modal{"data-reveal" => ""}
   %h2 You are not signed in

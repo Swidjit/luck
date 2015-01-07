@@ -18,7 +18,7 @@
         %h5 Best Luck
         -@best = Ranking.where(:game => game).order(score: :desc).limit(15)
         -@best.each do |l|
-          .stat-label=l.user.email
+          .stat-label=l.user.username
           .stat-data=l.score
           .clear
 
@@ -26,5 +26,5 @@
         %h5 Worst Luck
         -@worst = Ranking.where(:game => game).order(:score).limit(15)
         -@worst.each do |l|
-          .stat-label=l.user.email
+          .stat-label=l.user.username
           .stat-data=l.score
