@@ -3,7 +3,7 @@
     %li.name
       %h1
         =link_to root_path do
-          %i.fi-play
+          =image_tag('logo.png', :size=>'35x35')
           Good Luck
     / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
     %li.toggle-topbar.menu-icon
@@ -17,7 +17,7 @@
             %i.fi-play
             Play Games
         %li.has-form{:style => 'padding-right: 3px !important;'}
-          =link_to games_path, :class=>'button header-button' do
+          =link_to pages_path('leaderboard'), :class=>'button header-button' do
             %i.fi-crown
             Leaderboard
         %li.has-dropdown

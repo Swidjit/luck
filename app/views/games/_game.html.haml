@@ -1,4 +1,5 @@
-%img{:src => "assets/#{game.logo_url}"}/
+=link_to game_path(game.id) do
+  %img{:src => "assets/#{game.logo_url}"}/
 %h4.game-title=game.title
 .game-desc
   =game.description

@@ -5,21 +5,13 @@
     %p These 3 "games" of chance will test your luck and see how it compares to the rest of the world.  Come back once every 4 hours to try your luck again.
     %hr/
 .row
-  .large-4.columns
+  .small-12.medium-4.large-4.columns
     -game = Game.find(1)
     =render game
-  .large-4.columns
+  .small-12.medium-4.large-4.columns
     -game = Game.find(2)
     =render game
-  .large-4.columns
+  .small-12.medium-4.large-4.columns
     -game = Game.find(3)
     =render game
-.row
-  .large-12.columns
-    .panel
-      %h4 Get in touch!
-      .row
-        .large-9.columns
-          %p We'd love to hear from you, you attractive person you.
-        .large-3.columns
-          %a.radius.button.right{:href => "#"} Contact Us
+
