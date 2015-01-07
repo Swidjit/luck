@@ -11,25 +11,33 @@
             %p
               %span.details
                 =v
+-if user_signed_in?
 
-:javascript
-    var game_id = 2;
-    var flip_count = 0;
-    var score = 0;
-     $('.flip-container').on('click', function() {
-        $(this).children().addClass('flipped');
-        flip_count++;
-        score += parseInt($(this).attr('value'));
-        $('.score-value').text(score);
-        if(flip_count == 1) {
-          $('.game-score').css("display","block");
-        }
-
-        if(flip_count == 3) {
-          var data = {
-            score: score
+  :javascript
+      var game_id = 2;
+      var flip_count = 0;
+      var score = 0;
+       $('.flip-container').on('click', function() {
+          $(this).children().addClass('flipped');
+          flip_count++;
+          score += parseInt($(this).attr('value'));
+          $('.score-value').text(score);
+          if(flip_count == 1) {
+            $('.game-score').css("display","block");
           }
-          $.post('/games/'+game_id+'/save_score', data);
-        }
 
-      });
+          if(flip_count == 3) {
+            var data = {
+              score: score
+            }
+            $.post('/games/'+game_id+'/save_score', data);
+          }
+
+        });
+
+-else
+
+  :javascript
+    $('.flip-container').on('click', function() {
+      $('#myModal').foundation('reveal', 'open');
+    });

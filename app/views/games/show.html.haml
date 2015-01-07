@@ -29,8 +29,8 @@
           %a{:href => "#panel2"} Comments
         .content{"data-slug" => "panel2"}
           .comments
-            %h2 Comments
-            = render :partial => 'comments/form', :locals => { :comment => @new_comment }
+            -if user_signed_in?
+              = render :partial => 'comments/form', :locals => { :comment => @new_comment }
             = render :partial => 'comments/comment', :collection => @comments, :as => :comment
   .large-3.columns
 
@@ -55,3 +55,9 @@
         .stat-label=User.find(r.user_id).email
         .stat-data=r.score
 
+#myModal.reveal-modal{"data-reveal" => ""}
+  %h2 You are not signed in
+  %p.lead You'll need to register to participate
+  =link_to new_user_session_path do
+    %button.radius.button Login/Signup
+  %a.close-reveal-modal ×

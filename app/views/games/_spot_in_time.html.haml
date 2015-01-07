@@ -1,4 +1,8 @@
-%button.radius.button{:type => "submit", :id=>"submit"} Make Your Move
+-if user_signed_in?
+  %button.radius.button{:type => "submit", :id=>"submit"} Make Your Move
+-else
+  =link_to "#", :data => { :reveal_id => 'myModal'} do
+    %button.radius.button Draw Numbers
 %button.radius.button{:style=>"display:none;", :id=>"response"}
 :javascript
   $('#submit').click(function(){
