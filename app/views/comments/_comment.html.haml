@@ -1,0 +1,20 @@
+.comment-block
+  .comment.clearfix
+    - if current_user == comment.user
+      .comment-admin.green
+        =link_to comment_path(comment), :method => :delete, :remote => :true, :"data-placement" => "left", :"data-tooltip"=> "delete comment" do
+          .delete-link
+        =link_to "#",:id => "edit-comment-#{comment.id}", :class => 'edit-comment', :"data-comment-id" => comment.id, :"data-placement" => "left", :"data-tooltip"=> "edit comment" do
+          .edit-link
+    .comment-left
+      = image_tag('profile.svg', :size => '50x50')
+    .comment-content
+      .comment-right
+        .comment-meta.clearfix
+          %span.comment-author
+            =comment.user.email
+            says
+            =comment.body
+          %span.comment-date
+            = comment.created_at.strftime("%B %d, %Y at %l:%M %p")
+

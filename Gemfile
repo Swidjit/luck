@@ -20,6 +20,10 @@ gem 'foundation-rails', '5.4.5'
 gem 'foundation-icons-sass-rails'
 gem 'devise'
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
+gem 'acts_as_commentable_with_threading'
+gem 'simple_form'
+
+
 group :assets do
   gem 'sass-rails', '~> 4.0.3'
   gem 'coffee-rails', '~> 4.0.0'

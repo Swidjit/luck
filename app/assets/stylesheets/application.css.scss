@@ -144,10 +144,96 @@ i {
 	}
 }
 
-.col-33 {
-	width: 31%;
-	margin: 0 1%;
-	display: inline-block;
+/* comments */
+
+.comment {
+  position: relative;
+  text-align: left;
+  margin-bottom: 3px;
+}
+
+
+.comment-delete {
+  display: block;
+  position: absolute !important;
+  width: 18px;
+  height: 18px;
+  line-height: 16px;
+  font-size: 22px;
+  text-decoration: none;
+  text-align: center;
+  top: 2px;
+  right: 2px;
+  padding: 3px;
+  background: #ccc;
+}
+.comment-delete:hover {
+  background: #bbb;
+  text-decoration: none;
+}
+.comment-left {
+  float: left;
+  padding: 3px;
+  width: 54px;
+  height: 54px;
+  margin-right: -60px;
+  min-width: 40px;
+  min-height: 40px;
+  overflow: hidden;
+  background-color: #395771;
+}
+.comment-content {
+  float: left;
+  width: 100%;
+
+}
+.comment-right {
+  margin-left: 60px;
+  padding: 0px 10px;
+}
+.comment-meta {
+  margin-right: 40px;
+}
+.comment-author {
+  float: left;
+  font-size: 16px;
+  color: #000;
+}
+
+.comment-show-reply {
+
+  font-size: 13px;
+
+}
+.comment-date {
+  float: right;
+  font-size: 12px;
+  padding-top: 4px;
+  margin-right: 5px;
+}
+.comment-meta, .comment-meta a {
+  color: #395771;
+}
+.comment-block p {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+
+
+.delete-link {
+  background: url('profile.svg') no-repeat 2px 2px;
+  background-size: 15px;
+  width: 20px;
+  height: 20px;
+  float: right;
+}
+.edit-link {
+  background: url('profile.svg') no-repeat 2px 2px;
+  background-size: 15px;
+  width: 20px;
+  height: 20px;
+  float: right;
 }
 
 
