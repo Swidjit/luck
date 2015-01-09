@@ -43,6 +43,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    contact_us (0.5.4)
+      rails (>= 4.0.0)
     descriptive_statistics (2.4.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -160,6 +162,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_commentable_with_threading
   coffee-rails (~> 4.0.0)
+  contact_us (~> 0.5.1)
   descriptive_statistics (~> 2.4.0)
   devise
   formtastic (~> 3.0)

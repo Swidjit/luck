@@ -22,7 +22,7 @@ gem 'devise'
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 gem 'acts_as_commentable_with_threading'
 gem 'simple_form'
-
+gem 'contact_us', '~> 0.5.1'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'
