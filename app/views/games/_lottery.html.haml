@@ -40,7 +40,7 @@
     var game_id = 1;
     $('#submit-lottery').click(function(){
       $(this).remove();
-
+      $.get('/games/'+game_id+'/init_score');
       var guesses = [];
       var answers = [];
       var nums = $('#entry').children();
@@ -56,7 +56,7 @@
 
       var divs =  $('#results').children();
       var length = divs.length;
-      console.log(length);
+
       var index = 0;
       function replaceArticle() {
            divs.eq(index).css("display","inline");
@@ -75,18 +75,15 @@
                 $.each( answers, function( key, value ) {
                   var index = $.inArray( value, guesses );
                   if( index != -1 ) {
-                      console.log(guesses);
                       matches++;
                       guesses.splice(index,1);
-                      console.log(guesses);
                   }
                 });
                 var score = Math.pow(matches+1,3);
                 if(matches==0) score = 0;
-                console.log("score: " + score);
-                console.log("matches: " + matches);
                 var data = {
-                  score: score
+                  score: score,
+                  score_id: $('.game-score').attr('id')
                 }
                 $.post('/games/'+game_id+'/save_score', data);
            }

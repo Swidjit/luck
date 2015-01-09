@@ -5,7 +5,7 @@ namespace :stats do
     @games.each do |game|
       @avg = GameStat.where(:game_id => game.id).average(:avg)
       game.avg = @avg
-      game.increment!(:plays)
+
     end
   end
 

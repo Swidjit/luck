@@ -23,7 +23,7 @@
           score += parseInt($(this).attr('value'));
           $('.score-value').text(score);
           if(flip_count == 1) {
-            $('.game-score').css("display","block");
+            $.get('/games/'+game_id+'/init_score');
           }
 
           if(flip_count == 3) {

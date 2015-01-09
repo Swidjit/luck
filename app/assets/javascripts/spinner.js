@@ -95,8 +95,8 @@ $.fn.hasAttr = function(name) {
       // start spinner at position based on value attribute on .spinner
       var startingValue = 1;
       if($('.spinner').eq(index).attr('value')) startingValue = $('.spinner').eq(index).attr('value');
-       spinScroll.goToPage(0,startingValue,0);
-
+      //hack because script isnt working as it should so hard-coding starting value
+      spinScroll.goToPage(0,7,0);
       document.getElementById($(this).attr('id')).IScrollInstance = spinScroll;
 
     }); // .spinners each

@@ -17,10 +17,23 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
+  def init_score
+    @score = Score.new(:game=>@game, :user=>current_user, :value=>-1)
+    @score.save
+    @score.value = -1
+    if @score.save
+       respond_to do |format|
+        format.js {render 'init_score'}
+      end
+    end
+  end
+
   def save_score
-    @score = params[:score]
-    @score = Score.new(:game=>@game, :user=>current_user, :value=>params[:score],:game_num => @game.game_num)
+    @score = Score.where(:game=>@game, :user=>current_user, :value=>-1).last
+
+    @score.value = params[:score]
     if @score.save!
+      @game.increment!(:plays)
       @game_stat = GameStat.where(:game_id => @score.game.id, :user_id => current_user.id).first
       if @game_stat.present?
         new_score = @game_stat.total + @score.value
@@ -32,9 +45,7 @@ class GamesController < ApplicationController
       end
       @game_stat.save
 
-      respond_to do |format|
-        format.js {render 'score_saved'}
-      end
+
     end
   end
 
@@ -44,6 +55,8 @@ class GamesController < ApplicationController
     @score = Score.new(:game_id=>3, :user=>current_user, :value=>@s)
     @spot.destroy
     if @score.save!
+      @game=Game.find(3)
+      @game.increment!(:plays)
       @game_stat = GameStat.where(:game_id => @score.game.id, :user_id => current_user.id).first
       if @game_stat.present?
         new_score = @game_stat.total + @score.value

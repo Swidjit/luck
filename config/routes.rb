@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :games, :only => [:index, :show] do
     member do
       post 'save_score'
+      get 'init_score'
     end
     collection do
       get 'spot_value'
