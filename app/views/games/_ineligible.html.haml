@@ -1,0 +1,5 @@
+.red{:style=>"padding: 1px 10px"}
+  %h4 You may only play this game once every 3 hours.
+  %p You will be elibilible to play again in #{distance_of_time_in_words(Time.now,@eligibility_times[@game.id])}
+  %h5 You are eligible to play the following however:
+  =render :partial => 'eligible_games'

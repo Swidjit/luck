@@ -13,13 +13,16 @@
     .section-container.tabs{"data-section" => ""}
       %section.section
         .content{"data-slug" => "panel1"}
-          -case @game.id
-          -when 1
-            =render :partial => 'lottery'
-          -when 2
-            =render :partial => 'number_flip'
-          -when 3
-            =render :partial => 'spot_in_time'
+          -if @eligible_games.include?(@game.id)
+            -case @game.id
+            -when 1
+              =render :partial => 'lottery'
+            -when 2
+              =render :partial => 'number_flip'
+            -when 3
+              =render :partial => 'spot_in_time'
+          -else
+            =render :partial => 'ineligible'
           .completion-message
             .alert-box.success.radius{"data-alert" => ""}
               Your score is saved. Stats and ranking are updated hourly. You may play this game again in 3 hours
@@ -63,3 +66,6 @@
   =link_to new_user_session_path do
     %button.radius.button Login/Signup
   %a.close-reveal-modal ×
+
+#eligibleGames.reveal-modal{"data-reveal" => ""}
+  =render :partial => 'eligible_games'

@@ -1,0 +1,6 @@
+.row
+  -@eligible_games.each do |g|
+    .small-12.medium-6.large-6.columns
+      -game = Game.find(g)
+      -unless game.id==@game.id
+        =render game

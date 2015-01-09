@@ -1,14 +1,29 @@
 class GamesController < ApplicationController
   respond_to :html
   before_filter :load_resource_from_id, :except => [:index, :spot_value]
+  require 'action_view'
+
+  include ActionView::Helpers::DateHelper
   def show
     @user_ranking = Ranking.where(:game_id => params[:id], :user_id => current_user.id).first if user_signed_in?
     @best = Ranking.where(:game_id => params[:id]).order(score: :desc).limit(10)
     @worst = Ranking.where(:game_id => params[:id]).order(:score).limit(10)
 
     @comments = @game.comment_threads.order('created_at desc')
-    @new_comment = Comment.build_from(@game, current_user.id, "") if user_signed_in?
+    if user_signed_in?
+      @new_comment = Comment.build_from(@game, current_user.id, "")
 
+      #get all games user is eligible to play
+      @eligible_games = [1,2,3]
+      @eligibility_times = []
+      for i in 1..3
+        s = current_user.scores.where('game_id=? and created_at >= ?',i, 3.hours.ago).first
+        if s.present?
+          @eligible_games.delete(i)
+          @eligibility_times[i] = s.created_at + 3.hours
+        end
+      end
+    end
     # for card flip game
     @values = (1..20).to_a.shuffle
   end

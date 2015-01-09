@@ -5,7 +5,7 @@ var scrollerOptions = {
           bounce:true
           };
 
-$(document).ready(function(){
+$(document).on('ready page:load', function(){
 
 
 $.fn.hasAttr = function(name) {
@@ -13,6 +13,7 @@ $.fn.hasAttr = function(name) {
 };
     $('.spinner')
       .each(function (index) {
+      	console.log("hey");
         $(this).html('<div><ul></ul></div>');
         // shadow options
         if($(this).hasClass('shadow')){
