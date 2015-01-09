@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
   resources :games, :only => [:index, :show] do
     member do
@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   root :to => 'pages#home'
   get 'pages/:page_name' => 'pages#index', :as => :pages
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
 end

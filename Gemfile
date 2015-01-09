@@ -23,6 +23,8 @@ gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/sa
 gem 'acts_as_commentable_with_threading'
 gem 'simple_form'
 gem 'contact_us', '~> 0.5.1'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'
