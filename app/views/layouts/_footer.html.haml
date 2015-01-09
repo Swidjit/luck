@@ -14,3 +14,6 @@
             =link_to "Privacy Policy", pages_path("privacy")
           %li
             =link_to "Contact Us", "/contact-us"
+          -if user_signed_in?
+            %li
+              = link_to "Log out", destroy_session_path(:user), :method => :delete

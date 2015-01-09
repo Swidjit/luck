@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
 
   # GET /users/:id.:format
   def show
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/:id.:format
   def update
     # authorize! :update, @user
+    puts "updating"
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
@@ -30,12 +31,16 @@ class UsersController < ApplicationController
   def finish_signup
     # authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
-      if @user.update(user_params)
+      @user.username = params[:user][:username]
+      if @user.save
         @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        redirect_to root_path, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
+        puts "heyt"
+        puts @user.errors
+        finish_signup_path(@user)
       end
     end
   end

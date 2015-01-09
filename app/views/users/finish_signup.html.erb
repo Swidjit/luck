@@ -1,22 +1,29 @@
-<div id="add-email" class="container">
-  <h1>Add Email</h1>
+<div id="add-email" class="basic-form">
+  <h3>Choose a username</h3>
+  <p>This is how your account will be listed on profile and leaderboards</p>
   <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
-  <% if @show_errors && current_user.errors.any? %>
+  <%- puts @show_errors %>
+  <%- puts "sdfsdfsd" %>
+
+  <div class="form-group" style="width:200px;">
+    <%= f.label :username %>
+    <div class="controls">
+      <%= f.text_field :username, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'choose a public username' %>
+
+    </div>
+  </div>
+  <% if @show_errors && @user.errors.any? %>
   <div id="error_explanation">
-    <% current_user.errors.full_messages.each do |msg| %>
-    <%= msg %><br>
+    <% @user.errors.full_messages.each do |msg| %>
+    <div data-alert class="alert-box alert">
+	  <%= msg %>
+	  <a href="#" class="close">&times;</a>
+	</div>
     <% end %>
   </div>
   <% end %>
-  <div class="form-group">
-    <%= f.label :email %>
-    <div class="controls">
-      <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
-      <p class="help-block">Please confirm your email address. No spam.</p>
-    </div>
-  </div>
   <div class="actions">
-    <%= f.submit 'Continue', :class => 'btn btn-primary' %>
+    <%= f.submit 'Save Username', :class => 'button large' %>
   </div>
   <% end %>
 </div>
