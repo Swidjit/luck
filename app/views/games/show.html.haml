@@ -32,7 +32,15 @@
               = render :partial => 'comments/form', :locals => { :comment => @new_comment }
             = render :partial => 'comments/comment', :collection => @comments, :as => :comment
   .large-3.columns
-
+    .stats-box
+      %h5 Game Stats
+      .stat-label avg score
+      .stat-data
+        =@game.avg.round(2)
+      .clear
+      .stat-label times played
+      .stat-data
+        =@game.plays
     -if @user_ranking.present?
       .stats-box
         %h5 Your Stats
