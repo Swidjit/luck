@@ -29,6 +29,10 @@
               = link_to "Log out", destroy_session_path(:user), :method => :delete
     -else
       %ul.right
-        %li.active
-          =link_to "Login/Signup", new_user_session_path
+        %li.has-form{:style => 'padding-right: 3px !important;'}
+          =link_to new_user_session_path, :class=>'button header-button' do
+            Login
+        %li.has-form{:style => 'padding-right: 3px !important;'}
+          =link_to  new_user_registration_path, :class=>'button header-button' do
+            Register
 

@@ -13,7 +13,7 @@
     .section-container.tabs{"data-section" => ""}
       %section.section
         .content{"data-slug" => "panel1"}
-          -if @eligible_games.include?(@game.id)
+          -if !user_signed_in? || @eligible_games.include?(@game.id)
             -case @game.id
             -when 1
               =render :partial => 'lottery'
@@ -62,16 +62,16 @@
   =link_to new_user_session_path do
     %button.radius.button Login/Signup
   %a.close-reveal-modal ×
+-if user_signed_in?
+  #gameComplete.reveal-modal{"data-reveal" => ""}
+    .green{:style =>"padding: 0 5px; margin-right: 10px;"}
 
-#gameComplete.reveal-modal{"data-reveal" => ""}
-  .green{:style =>"padding: 0 5px; margin-right: 10px;"}
-
-    %h4
-      Your score has been saved:
-      .score-value 0
-  -if @eligible_games.size > 1
-    %h5 You are also currently elibile to play:
-    =render :partial => 'eligible_games'
-  -else
-    %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
-  %a.close-reveal-modal ×
+      %h4
+        Your score has been saved:
+        .score-value 0
+    -if @eligible_games.size > 1
+      %h5 You are also currently elibile to play:
+      =render :partial => 'eligible_games'
+    -else
+      %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
+    %a.close-reveal-modal ×
