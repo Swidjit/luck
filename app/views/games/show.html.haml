@@ -23,10 +23,6 @@
               =render :partial => 'spot_in_time'
           -else
             =render :partial => 'ineligible'
-          .completion-message
-            .alert-box.success.radius{"data-alert" => ""}
-              Your score is saved. Stats and ranking are updated hourly. You may play this game again in 3 hours
-              %a.close{:href => "#"} &times;
       %section.section
         %h5.title
           %a{:href => "#panel2"} Comments
@@ -67,5 +63,15 @@
     %button.radius.button Login/Signup
   %a.close-reveal-modal ×
 
-#eligibleGames.reveal-modal{"data-reveal" => ""}
-  =render :partial => 'eligible_games'
+#gameComplete.reveal-modal{"data-reveal" => ""}
+  .green{:style =>"padding: 0 5px; margin-right: 10px;"}
+
+    %h4
+      Your score has been saved:
+      .score-value 0
+  -if @eligible_games.size > 1
+    %h5 You are also currently elibile to play:
+    =render :partial => 'eligible_games'
+  -else
+    %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
+  %a.close-reveal-modal ×
