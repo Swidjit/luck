@@ -26,6 +26,7 @@ class GamesController < ApplicationController
     end
     # for card flip game
     @values = (1..20).to_a.shuffle
+
   end
 
   def index

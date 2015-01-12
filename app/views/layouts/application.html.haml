@@ -1,6 +1,6 @@
 !!! 5
 %html{ :lang => "en"}
-  %head
+  %head{:prefix => "og: http://ogp.me/ns#"}
     %meta{ :charset => "utf-8" }
 
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
@@ -12,7 +12,7 @@
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = favicon_link_tag "favicon.ico"
     = csrf_meta_tag
-
+    =yield :head
   %body
     =render :partial => 'layouts/head'
     %p.notice= notice

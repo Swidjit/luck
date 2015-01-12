@@ -1,3 +1,8 @@
+-content_for :head do
+  %meta{:content => "Test Your Luck", :property => "og:title"}
+  %meta{:content => "Good Luck", :property => "og:site_name"}
+  %meta{:content => "Take an hourly luck test and see how you luck compares to people across the world.", :property => "og:description"}
+
 .row
   .large-12.columns
     %h3 Luck.
@@ -14,4 +19,32 @@
   .small-12.medium-4.large-4.columns
     -game = Game.find(3)
     =render game
+.row
+  .large-12.columns
+    .panel
+      %h4 Spread the word!
+      .row
+        .large-10.columns
+          %p The more people playing, the better.  Help us spread the word.
+        .large-2.columns
+          .fb-share-button{"data-href" => "https://developers.facebook.com/docs/plugins/", "data-layout" => "button"}
 
+:javascript
+  $(document).on('ready page:load', function(){
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1522911697961808',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+  });

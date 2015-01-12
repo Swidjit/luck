@@ -39,14 +39,16 @@ class User < ActiveRecord::Base
 
       email = auth.info.email
       user = User.where(:email => email).first if email
-
+      puts auth.token
+      puts auth.credentials.token
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
         first_name: auth.extra.raw_info.name,
         username: "dummy-#{Time.now.strftime('%s')}",
         email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-        password: Devise.friendly_token[0,20]
+        password: Devise.friendly_token[0,20],
+        authentication_token: auth.credentials.token
         )
         user.skip_confirmation!
         user.save!

@@ -25,6 +25,7 @@ gem 'simple_form'
 gem 'contact_us', '~> 0.5.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "koala", "~> 1.11.0rc"
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'

@@ -1,9 +1,15 @@
+-content_for :head do
+  %meta{:content => "Test Your Luck", :property => "og:title"}
+  %meta{:content => "Good Luck", :property => "og:site_name"}
+  %meta{:content => "Take an hourly luck test and see how you luck compares to people across the world.", :property => "og:description"}
 .row
   .large-9.columns
     .row
       .large-6.columns
         %h3.game-title
           =@game.title
+          .fb-share-button{"data-href" => "https://developers.facebook.com/docs/plugins/", "data-layout" => "button"}
+
       .large-6.columns
         .game-score.right
           .score-label Score:
@@ -32,6 +38,7 @@
               = render :partial => 'comments/form', :locals => { :comment => @new_comment }
             = render :partial => 'comments/comment', :collection => @comments, :as => :comment
   .large-3.columns
+
     .stats-box
       %h5 Game Stats
       .stat-label avg score
@@ -83,3 +90,41 @@
     -else
       %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
     %a.close-reveal-modal ×
+
+
+:javascript
+  $(document).on('ready page:load', function(){
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1522911697961808',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+    //ignore all this for now, just developing code to get additional permissions and gonna leave it here for now until publish_actions is allowed on app review
+    $('#share2').click(function(){
+      FB.login(function(response) {
+        if (response.authResponse) {
+          // user gave permission
+        } else {
+          // user did not give permission
+        }
+      }, {scope:'publish_actions'});
+    });
+    $('#share').click(function(){
+      FB.api('/me/conversations', 'get',  {
+          access_token : 'CAAVpFILIA1ABACHHZCScmjxjkNe9UufaZBkHgox8iq6SgcZBjEZCSAkVh5jJ29g2ONouiy724D4ogeViQCmWeiSSMbg1Ky0Csjf20fnIKPmSFTkJ9KRS8wLZA8VMXgZCw74yFVokOz9hXAvDko2WB4zRLTipld6XXwbeJt5uhmJLZB6CNv8nOtxxc850nUJ7XqEQc0e9LQhIQZDZD'
+        },function(response) {
+        console.log(response);
+      });
+    });
+  });
