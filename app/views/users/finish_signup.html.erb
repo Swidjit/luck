@@ -1,29 +1,34 @@
-<div id="add-email" class="basic-form">
-  <h3>Choose a username</h3>
-  <p>This is how your account will be listed on profile and leaderboards</p>
-  <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
-  <%- puts @show_errors %>
-  <%- puts "sdfsdfsd" %>
+<div class="row">
+	<div class="large-12.small-12.columns">
 
-  <div class="form-group" style="width:200px;">
-    <%= f.label :username %>
-    <div class="controls">
-      <%= f.text_field :username, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'choose a public username' %>
+		<div id="add-email" class="basic-form">
+		  <h3>Choose a username</h3>
+		  <p>This is how your account will be listed on your profile, in comments and on leaderboards</p>
+		  <%= form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
+		  <%- puts @show_errors %>
+		  <%- puts "sdfsdfsd" %>
 
-    </div>
-  </div>
-  <% if @show_errors && @user.errors.any? %>
-  <div id="error_explanation">
-    <% @user.errors.full_messages.each do |msg| %>
-    <div data-alert class="alert-box alert">
-	  <%= msg %>
-	  <a href="#" class="close">&times;</a>
+		  <div class="form-group" style="width:200px;">
+		    <%= f.label :username %>
+		    <div class="controls">
+		      <%= f.text_field :username, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'choose a public username' %>
+
+		    </div>
+		  </div>
+		  <% if @show_errors && @user.errors.any? %>
+		  <div id="error_explanation">
+		    <% @user.errors.full_messages.each do |msg| %>
+		    <div data-alert class="alert-box alert">
+			  <%= msg %>
+			  <a href="#" class="close">&times;</a>
+			</div>
+		    <% end %>
+		  </div>
+		  <% end %>
+		  <div class="actions">
+		    <%= f.submit 'Save Username', :class => 'button large' %>
+		  </div>
+		  <% end %>
+		</div>
 	</div>
-    <% end %>
-  </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit 'Save Username', :class => 'button large' %>
-  </div>
-  <% end %>
 </div>
