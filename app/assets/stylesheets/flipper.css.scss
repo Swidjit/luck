@@ -5,6 +5,7 @@
   -moz-perspective:1200;
   perspective:1200;
   display: inline-block;
+  cursor:pointer;
 }
 .flipped {
   -webkit-transform:rotateY(180deg);
@@ -36,7 +37,7 @@
   transform:rotateY(-180deg);
 }
 .creation p {
-  color:#666;
+
   display:block;
   width:auto;
   text-align:center;
@@ -49,12 +50,14 @@
   vertical-align:middle;
   display:inline-block;
   line-height:1.4;
+  pointer-events: none;
+  color:#444;
 }
 .cont {
   border-radius:50%;
-  background-color:#ddd;
+  background-color:#A3D39C;
   width:80px;
   height:80px;
   display:inline-block;
-  border:8px solid #1abc9c;
+  border:6px solid #35404F;
 }

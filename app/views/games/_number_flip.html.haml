@@ -18,21 +18,23 @@
       var flip_count = 0;
       var score = 0;
        $('.flip-container').on('click', function() {
-          $(this).children().addClass('flipped');
-          flip_count++;
-          score += parseInt($(this).attr('value'));
-          $('.score-value').text(score);
-          if(flip_count == 1) {
-            $.get('/games/'+game_id+'/init_score');
-          }
-
-          if(flip_count == 3) {
-            var data = {
-              score: score
+          if(flip_count < 3) {
+            $(this).children().addClass('flipped');
+            flip_count++;
+            score += parseInt($(this).attr('value'));
+            $('.score-value').text(score);
+            if(flip_count == 1) {
+              $.get('/games/'+game_id+'/init_score');
             }
-            $.post('/games/'+game_id+'/save_score', data);
-          }
 
+            if(flip_count == 3) {
+              var data = {
+                score: score
+              }
+              $.post('/games/'+game_id+'/save_score', data);
+
+            }
+          }
         });
 
 -else
