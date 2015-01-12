@@ -1,0 +1,14 @@
+.row
+  .large-9.columns
+    %h2=@user.username
+    %p=@user.about
+  .large-3.columns
+    .stats-box
+      %h5 #{@user.username}'s stats
+      .stat-label overall score
+      .stat-data
+        =@user.score.round(2)
+      .clear
+      .stat-label overall percentile
+      .stat-data
+        =@user.percentile

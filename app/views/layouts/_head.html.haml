@@ -24,6 +24,8 @@
           %a{:href => "#"}=current_user.username
           %ul.dropdown
             %li
+              =link_to "Your Profile", profile_path(current_user.username)
+            %li
               %a{:href => "#"} Account Settings
             %li.active
               = link_to "Log out", destroy_session_path(:user), :method => :delete
