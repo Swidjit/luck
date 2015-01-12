@@ -12,7 +12,7 @@
       .comment-right
         .comment-meta.clearfix
           %span.comment-author
-            =comment.user.email
+            =link_to "@#{comment.user.username}", profile_path(comment.user.username)
             says
             =comment.body
           %span.comment-date

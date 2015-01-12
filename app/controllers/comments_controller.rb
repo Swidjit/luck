@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     # Not implemented: check to see whether the user has permission to create a comment on this object
     @comment = Comment.build_from(@obj, current_user.id, @comment_hash[:body])
     if @comment.save
-      render :partial => "comments/comment", :locals => { :comment => @comment }, :layout => false, :status => :created
+      render :partial => "show_comment", :locals => { :comment => @comment }, :layout => false, :status => :created
     else
       render :js => "alert('error saving comment');"
     end

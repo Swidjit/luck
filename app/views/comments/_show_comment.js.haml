@@ -1,0 +1,2 @@
+$('.comments').append("#{escape_javascript render @comment}");
+$('html, body').animate({scrollTop: $(".comment-bottom").offset().top}, 1000);
