@@ -70,12 +70,13 @@
         .stat-label=User.find(r.user_id).username
         .stat-data=r.score
         .clear
-    .stats-box
-      %h5.title Hot Streaks
-      -@streaks.each do |r|
-        .stat-label=User.find(r.user_id).username
-        .stat-data=r.streak
-        .clear
+    -if @streaks.present?
+      .stats-box
+        %h5.title Hot Streaks
+        -@streaks.each do |r|
+          .stat-label=User.find(r.user_id).username
+          .stat-data=r.streak
+          .clear
 #myModal.reveal-modal{"data-reveal" => ""}
   %h2 You are not signed in
   %p.lead You'll need to register to participate
