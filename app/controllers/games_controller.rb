@@ -8,7 +8,7 @@ class GamesController < ApplicationController
     @user_ranking = Ranking.where(:game_id => params[:id], :user_id => current_user.id).first if user_signed_in?
     @best = Ranking.where(:game_id => params[:id]).order(score: :desc).limit(10)
     @worst = Ranking.where(:game_id => params[:id]).order(:score).limit(10)
-
+    @streaks = @game.streaks.where(:direction=>"good").order(streak: :desc).limit(10)
     @comments = @game.comment_threads.order('created_at desc')
     if user_signed_in?
       @new_comment = Comment.build_from(@game, current_user.id, "")

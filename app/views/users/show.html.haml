@@ -12,3 +12,9 @@
       .stat-label overall percentile
       .stat-data
         =@user.percentile
+      .clear
+      .stat-label current streak
+      .stat-data
+        -streak = @user.streaks.where(:game_id=>0).first
+        =streak.streak
+        =streak.direction
