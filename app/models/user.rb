@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :scores, :dependent => :delete_all
+  has_many :streaks, :dependent => :delete_all
 
   attr_accessor :login
 

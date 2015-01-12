@@ -17,7 +17,7 @@ class GamesController < ApplicationController
       @eligible_games = [1,2,3]
       @eligibility_times = []
       for i in 1..3
-        s = current_user.scores.where('game_id=? and created_at >= ?',i, 1.hours.ago).first
+        s = current_user.scores.where('game_id=? and created_at >= ?',i, 1.seconds.ago).first
         if s.present?
           @eligible_games.delete(i)
           @eligibility_times[i] = s.created_at + 3.hours

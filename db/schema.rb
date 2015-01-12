@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110172404) do
+ActiveRecord::Schema.define(version: 20150112035827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20150110172404) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "avg"
-    t.integer  "plays",       default: 0
-    t.integer  "game_num",    default: 1
+    t.integer  "plays",          default: 0
+    t.integer  "game_num",       default: 1
+    t.float    "expected_score"
   end
 
   create_table "identities", force: true do |t|
@@ -80,6 +81,13 @@ ActiveRecord::Schema.define(version: 20150110172404) do
 
   create_table "spot_values", force: true do |t|
     t.integer "value"
+  end
+
+  create_table "streaks", force: true do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "streak",    default: 0
+    t.string  "direction"
   end
 
   create_table "users", force: true do |t|
