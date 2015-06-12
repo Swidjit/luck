@@ -25,14 +25,13 @@
           =link_to pages_path('leaderboard'), :class=>'button header-button' do
             %i.fi-crown
             Leaderboard
-        %li.has-dropdown
-          %a{:href => "#"}=current_user.username
-          %ul.dropdown
+        %li#user-menu-icon.has-form{:style => 'padding-right: 3px !important;'}
 
-            %li
-              %a{:href => "#"} Account Settings
-            %li.active
-              = link_to "Log out", destroy_session_path(:user), :method => :delete
+          %i.fi-torso-female
+          #user-menu
+            .game-listing
+              =link_to destroy_user_session_path, :method => 'delete' do
+                logout
     -else
       %ul.right
         %li.has-form{:style => 'padding-right: 3px !important;'}
