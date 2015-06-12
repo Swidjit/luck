@@ -16,5 +16,24 @@
 //= require turbolinks
 //= require_tree .
 //= require spinner
+//= require social-share-button
 
 $(function(){ $(document).foundation(); });
+$(document).on('ready', function(){
+
+	$("#play").show();
+	$("#play").hover(
+    	function() {
+	    	$("#games").stop().toggle('fast');
+
+		},
+		function() {
+	    	$("#games").stop().toggle('fast');
+		}
+
+	);
+
+});
+$(document).on('ready page:load', function(){
+
+});

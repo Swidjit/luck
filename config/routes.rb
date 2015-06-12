@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, :only => [:show]
+
   resources :comments, :only => [:create, :destroy]
 
   root :to => 'pages#home'
   get 'pages/:page_name' => 'pages#index', :as => :pages
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  get '/:display_name' => 'users#show', :as => :profile
+
 end

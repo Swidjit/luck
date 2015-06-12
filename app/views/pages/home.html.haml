@@ -24,11 +24,9 @@
     .panel
       %h4 Spread the word!
       .row
-        .large-10.columns
-          %p The more people playing, the better.  Help us spread the word.
-        .large-2.columns
-          .fb-share-button{"data-href" => "https://developers.facebook.com/docs/plugins/", "data-layout" => "button"}
-
+        .large-12.columns
+          %p The more people playing, the better. Plus, games are better with friends, so please share widely!
+          =social_share_button_tag("How Lucky Are You?")
 :javascript
   $(document).on('ready page:load', function(){
       window.fbAsyncInit = function() {

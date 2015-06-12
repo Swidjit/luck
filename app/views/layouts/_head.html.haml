@@ -12,10 +12,15 @@
   %section.top-bar-section
     -if user_signed_in?
       %ul.right
-        %li.has-form{:style => 'padding-right: 3px !important;'}
-          =link_to games_path, :class=>'button header-button' do
-            %i.fi-play
+        %li#play.has-form{:style => 'padding-right: 3px !important;'}
+          %button.header-button
+
             Play Games
+            %i.fi-play
+          #games
+            -@games = Game.all
+            -@games.each do |g|
+              =render :partial => 'games/menu_listing', :locals => {game:g}
         %li.has-form{:style => 'padding-right: 3px !important;'}
           =link_to pages_path('leaderboard'), :class=>'button header-button' do
             %i.fi-crown
@@ -23,8 +28,7 @@
         %li.has-dropdown
           %a{:href => "#"}=current_user.username
           %ul.dropdown
-            %li
-              =link_to "Your Profile", profile_path(current_user.username)
+
             %li
               %a{:href => "#"} Account Settings
             %li.active
