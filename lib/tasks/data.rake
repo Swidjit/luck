@@ -15,10 +15,10 @@ namespace :data do
       answers= []
 
       for i in 1..5
-        guesses << Random.rand(20)
+        guesses << Random.rand(15)
       end
       for i in 1..5
-        answers << Random.rand(20)
+        answers << Random.rand(15)
       end
 
       count = 0
@@ -45,5 +45,23 @@ namespace :data do
     game.save
   end
 
+  task :set_expected_score_for_press_on => :environment do
+    total_score = 0
+    for i in 1..1000 do
+      values = [0,0,0,1,1,1,5,5,5,10,10,10,25,25,25,50]
+      score = 0
+      val = -1
+      while val != 0
+        val = values.shuffle.pop
+        values.push(0)
+        score += val
+        puts "#{val} - #{score}"
+      end
+      total_score += score
+      puts "total score: #{total_score}"
+    end
+    avg_score = total_score/1000
+    puts avg_score
+  end
 
 end

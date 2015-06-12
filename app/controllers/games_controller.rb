@@ -14,7 +14,7 @@ class GamesController < ApplicationController
       @new_comment = Comment.build_from(@game, current_user.id, "")
 
       #get all games user is eligible to play
-      @eligible_games = [1,2,3]
+      @eligible_games = [1,2,3,4]
       @eligibility_times = []
       for i in 1..3
         s = current_user.scores.where('game_id=? and created_at >= ?',i, 1.hours.ago).first

@@ -144,6 +144,21 @@ i {
 	}
 }
 
+.grid-piece {
+  background-color: #ccc;
+  margin: 0px;
+  display: inline-block;
+  font-size: 80px;
+  padding: 4px 0px;
+  width: 100px;
+  margin-bottom: 4px;
+  text-align:center;
+  line-height: 80px;
+  span {
+    color: #000;
+  }
+}
+
 /* comments */
 
 .comment {
