@@ -1,49 +1,64 @@
 .row
   .small-12.medium-4.large-4.columns
     .stats-box
+      %h3 overall leaders
+      -User.all.order(score: :desc).limit(10).each do |s|
+        .stat-label=s.username
+        .stat-data=s.score.round(1)
+        .clear
+  .small-12.medium-4.large-4.columns
+    .stats-box
       %h3 hottest players
       -Streak.where(:game_id=>0).order(streak: :desc).limit(10).each do |s|
-        .stat-label s.user.username
+        .stat-label=s.user.username
         .stat-data=s.streak
         .clear
   .small-12.medium-4.large-4.columns
     .stats-box
       %h3 coldest players
       -Streak.where(:game_id=>0).order(streak: :asc).limit(10).each do |s|
-        .stat-label s.user.username
+        .stat-label=s.user.username
         .stat-data=s.streak
         .clear
+
 .row
   -Game.all.each do |game|
-    .small-12.medium-4.large-4.columns
-      .stats-box
-        %h3=game.title
-        .stat-label Avg Score
-        .stat-data=game.avg.round(2)
-        .clear
-        -if user_signed_in?
-          -@stat = GameStat.where(:user_id=>current_user.id, :game_id=>game.id).first
-          -if @stat.present?
-            .stat-label Your Avg
-            .stat-data=@stat.avg.round(2)
-            .clear
-        .stat-label Times Played
-        .stat-data=game.plays
-        %h5 Best Luck
-        -@best = Ranking.where(:game => game).order(score: :desc).limit(15)
-        -@best.each do |l|
-          .stat-label=l.user.username
-          .stat-data=l.score
-          .clear
-        %h5 Worst Luck
-        -@worst = Ranking.where(:game => game).order(:score).limit(15)
-        -@worst.each do |l|
-          .stat-label=l.user.username
-          .stat-data=l.score.round(2)
-          .clear
-        %h5.title Hot Streaks
-        -@streaks = game.streaks.where(:direction=>"good").order(streak: :desc).limit(10)
-        -@streaks.each do |r|
-          .stat-label=User.find(r.user_id).username
-          .stat-data=r.streak
-          .clear
+    .small-12.medium-12.large-12.columns
+      .stats-box{:style=> "padding: 8px 8px 25px;"}
+        .row{:style=>"background-color: #ddd;margin: 0px;padding: 2px 0;"}
+          .small-12.medium-3.large-3.columns
+            %h3=game.title
+          .small-12.medium-3.large-3.columns
+            %label Avg Score
+            %span=game.avg.round(1)
+          -if user_signed_in?
+            -@stat = GameStat.where(:user_id=>current_user.id, :game_id=>game.id).first
+            -if @stat.present?
+              .small-12.medium-3.large-3.columns
+                %label Your Avg
+                %span=@stat.avg.round(1)
+          .small-12.medium-3.large-3.columns
+            %label Times Played
+            %span=game.plays
+        .row{:style=>"padding: 0px 5px;"}
+          .small-4.medium-4.large-4.columns
+            %h5 Best Luck
+            -@best = Ranking.where(:game => game).order(score: :desc).limit(15)
+            -@best.each do |l|
+              .stat-label=l.user.username
+              .stat-data=l.score
+              .clear
+          .small-4.medium-4.large-4.columns
+            %h5 Worst Luck
+            -@worst = Ranking.where(:game => game).order(:score).limit(15)
+            -@worst.each do |l|
+              .stat-label=l.user.username
+              .stat-data=l.score.round(1)
+              .clear
+          .small-4.medium-4.large-4.columns
+            %h5.title Hot Streaks
+            -@streaks = game.streaks.where(:direction=>"good").order(streak: :desc).limit(10)
+            -@streaks.each do |r|
+              .stat-label=User.find(r.user_id).username
+              .stat-data=r.streak
+              .clear

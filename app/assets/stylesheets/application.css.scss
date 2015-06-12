@@ -91,6 +91,13 @@ i {
     opacity: .5;
     margin-bottom: 10px;
     color: $dark-blue;
+    text-transform: uppercase;
+  }
+
+  h5 {
+
+margin-top: 15px;
+font-size: 20px;
   }
   a {
     color: #8BC9C5;
@@ -98,13 +105,26 @@ i {
   a:hover {
     text-decoration: underline;
   }
-  padding: 6px 10px;
-  margin-bottom: 10px;
-  background-color: $light-gray;
+  label,span {
+    display: block;
+    text-align:center;
+  }
+  label {
+    font-size: 17px;
+    text-transform:uppercase;
+  }
+  span {
+    font-size: 16px;
+    color: #111;
+  }
+  padding: 6px 12px;
+  margin-bottom: 15px;
+  background-color: rgba(232, 234, 237, 0.71);
 }
 .stat-label, .stat-data {
   display: inline;
-  color: rgba(250, 244, 244, 0.87);
+  color: gray;
+  line-height: 30px;
 }
 .stat-label {
   clear: both;
