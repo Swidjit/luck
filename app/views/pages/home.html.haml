@@ -1,14 +1,17 @@
 -content_for :head do
+  %title Good Luck Test
   %meta{:content => "Test Your Luck", :property => "og:title"}
   %meta{:content => "Good Luck", :property => "og:site_name"}
   %meta{:content => "Take an hourly luck test and see how you luck compares to people across the world.", :property => "og:description"}
-
+  %meta{:content => 'Good Luck Test', :property => "title"}
+  %meta{:property => "description", :content => 'Is it your lucky day?  Is your overall luck good or bad? Test your luck with these fun quick games and see how lucky you are compared to others across the world. '}
+  %meta{:property => 'keywords', :content => 'luck,lucky,good,test,day,exam,how,game,press,lottery,play, competition'}
 .row
   .large-12.columns
     %h3 Luck.
     %h4 Some claim theirs is good.  Others say theirs is bad.  Many say it does not or cannot exist.  It's time to find out the truth.
     %p These 3 "games" of chance will test your luck and see how it compares to the rest of the world.  Come back once every 4 hours to try your luck again.
-    %hr/
+    %hr
 .row
   -Game.all.each do |game|
     .small-12.medium-6.large-3.columns

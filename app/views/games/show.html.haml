@@ -1,7 +1,11 @@
 -content_for :head do
-  %meta{:content => "Test Your Luck", :property => "og:title"}
+  %title #{@game.title} | A Luck Test
+  %meta{:content => "#{@game.title} | A Luck Test", :property => "og:title"}
   %meta{:content => "Good Luck", :property => "og:site_name"}
-  %meta{:content => "Take an hourly luck test and see how you luck compares to people across the world.", :property => "og:description"}
+  %meta{:content => "#{@game.description}", :property => "og:description"}
+  %meta{:content => "World's Luckiest People", :property => "title"}
+  %meta{:property => "description", :content => "#{@game.description}"}
+  %meta{:property => 'keywords', :content => '#{@game.itle}, luck, games, test, exam, play'}
 .row
   .large-9.columns
     .row

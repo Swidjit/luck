@@ -28,6 +28,7 @@ gem 'omniauth-facebook'
 gem "koala", "~> 1.11.0rc"
 gem 'social-share-button'
 
+gem 'meta-tags'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.3'
