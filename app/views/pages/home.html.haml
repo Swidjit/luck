@@ -10,23 +10,33 @@
     %p These 3 "games" of chance will test your luck and see how it compares to the rest of the world.  Come back once every 4 hours to try your luck again.
     %hr/
 .row
-  .small-12.medium-4.large-4.columns
-    -game = Game.find(1)
-    =render game
-  .small-12.medium-4.large-4.columns
-    -game = Game.find(2)
-    =render game
-  .small-12.medium-4.large-4.columns
-    -game = Game.find(3)
-    =render game
+  -Game.all.each do |game|
+    .small-12.medium-6.large-3.columns
+      =render game
+
 .row
   .large-12.columns
     .panel
       %h4 Spread the word!
       .row
-        .large-12.columns
+        .large-7.columns
           %p The more people playing, the better. Plus, games are better with friends, so please share widely!
           =social_share_button_tag("How Lucky Are You?")
+
+        .large-5.columns
+          .stats-box
+            %h3 luckiest players - all time
+            -User.all.order(score: :desc).limit(10).each do |s|
+              .stat-label=s.username
+              .stat-data=s.score.round(1)
+              .clear
+          .stats-box
+            %h3 luckiest players - today
+            -@todays_luckiest.each do |s|
+              -if s.present?
+                .stat-label=s.username
+
+                .clear
 :javascript
   $(document).on('ready page:load', function(){
       window.fbAsyncInit = function() {

@@ -9,9 +9,9 @@ class GamesController < ApplicationController
     @best = Ranking.where(:game_id => params[:id]).order(score: :desc).limit(10)
     @worst = Ranking.where(:game_id => params[:id]).order(:score).limit(10)
     @streaks = @game.streaks.where(:direction=>"good").order(streak: :desc).limit(10)
-    @comments = @game.comment_threads.order('created_at desc')
+    #@comments = @game.comment_threads.order('created_at desc')
     if user_signed_in?
-      @new_comment = Comment.build_from(@game, current_user.id, "")
+      #@new_comment = Comment.build_from(@game, current_user.id, "")
 
       #get all games user is eligible to play
       @eligible_games = [1,2,3,4]

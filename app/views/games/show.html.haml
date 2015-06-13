@@ -16,6 +16,12 @@
           .score-value 0
     .game-desc
       =@game.description
+    .ad
+      %script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+      / good luck - above game
+      %ins.adsbygoogle{"data-ad-client" => "ca-pub-1203319491225179", "data-ad-format" => "auto", "data-ad-slot" => "5098510223", :style => "display:block"}
+      :javascript
+        (adsbygoogle = window.adsbygoogle || []).push({});
     .section-container.tabs{"data-section" => ""}
       %section.section
         .content{"data-slug" => "panel1"}
@@ -40,8 +46,8 @@
         .content{"data-slug" => "panel2"}
           .comments
             -if user_signed_in?
-              = render :partial => 'comments/form', :locals => { :comment => @new_comment }
-            = render :partial => 'comments/comment', :collection => @comments, :as => :comment
+              -#= render :partial => 'comments/form', :locals => { :comment => @new_comment }
+            -#= render :partial => 'comments/comment', :collection => @comments, :as => :comment
           .comment-bottom
   .large-3.columns
 
