@@ -9,10 +9,70 @@
 .clear
 -if user_signed_in?
   %button.radius.button{:type => "submit", :id=>"submit-lottery"} Draw Numbers
+  :javascript
+    $(document).on('ready page:load', function(){
+      var game_id = 1;
+      $('#submit-lottery').click(function(){
+        $(this).remove();
+        $.get('/games/'+game_id+'/init_score');
+        var guesses = [];
+        var answers = [];
+        var nums = $('#entry').children();
+        $('.spinner').each(function(key, value) {
+          guesses.push(parseInt($(this).attr('value')));
+          nums.eq(key).children().html($(this).attr('value'));
+          nums.eq(key).css("display","inline");
+        });
+        $('#spinners').remove();
+
+        var speed = 1000;
+        var timer = setInterval(replaceArticle, speed);
+
+        var divs =  $('#results').children();
+        var length = divs.length;
+
+        var index = 0;
+        function replaceArticle() {
+             divs.eq(index).css("display","inline");
+             var num = Math.floor((Math.random() * 15) + 1);
+             divs.eq(index).children().text(num);
+             answers.push(parseInt(num));
+             if(index==1) {
+                $('.game-score').css("display","block");
+             }
+             index++;
+
+             // remove timer after interating through all divs
+             if (index >= length) {
+                 clearInterval(timer);
+                  var matches = 0;
+                  $.each( answers, function( key, value ) {
+                    var index = $.inArray( value, guesses );
+                    if( index != -1 ) {
+                        matches++;
+                        guesses.splice(index,1);
+                    }
+                  });
+                  var score = Math.pow(matches+1,3);
+                  if(matches==0) score = 0;
+                  var data = {
+                    score: score,
+                    score_id: $('.game-score').attr('id')
+                  }
+                  $.post('/games/'+game_id+'/save_score', data);
+             }
+
+        }
+      });
+    });
+
 -else
   =link_to "#", :data => { :reveal_id => 'myModal'} do
-    %button.radius.button Draw Numbers
-
+    %button#login-to-play.radius.button Draw Numbers
+  :javascript
+    $('#login-to-play').on('click', function() {
+      $('#myModal').foundation('reveal', 'open');
+    });
 #entry
   .lottery.red
     %span
@@ -35,59 +95,3 @@
     %span
   .lottery.blue-green
     %span
-:javascript
-  $(document).on('ready page:load', function(){
-    var game_id = 1;
-    $('#submit-lottery').click(function(){
-      $(this).remove();
-      $.get('/games/'+game_id+'/init_score');
-      var guesses = [];
-      var answers = [];
-      var nums = $('#entry').children();
-      $('.spinner').each(function(key, value) {
-        guesses.push(parseInt($(this).attr('value')));
-        nums.eq(key).children().html($(this).attr('value'));
-        nums.eq(key).css("display","inline");
-      });
-      $('#spinners').remove();
-
-      var speed = 1000;
-      var timer = setInterval(replaceArticle, speed);
-
-      var divs =  $('#results').children();
-      var length = divs.length;
-
-      var index = 0;
-      function replaceArticle() {
-           divs.eq(index).css("display","inline");
-           var num = Math.floor((Math.random() * 15) + 1);
-           divs.eq(index).children().text(num);
-           answers.push(parseInt(num));
-           if(index==1) {
-              $('.game-score').css("display","block");
-           }
-           index++;
-
-           // remove timer after interating through all divs
-           if (index >= length) {
-               clearInterval(timer);
-                var matches = 0;
-                $.each( answers, function( key, value ) {
-                  var index = $.inArray( value, guesses );
-                  if( index != -1 ) {
-                      matches++;
-                      guesses.splice(index,1);
-                  }
-                });
-                var score = Math.pow(matches+1,3);
-                if(matches==0) score = 0;
-                var data = {
-                  score: score,
-                  score_id: $('.game-score').attr('id')
-                }
-                $.post('/games/'+game_id+'/save_score', data);
-           }
-
-      }
-    });
-  });

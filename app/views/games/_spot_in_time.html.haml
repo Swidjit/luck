@@ -1,14 +1,18 @@
 %p When you are ready, simply click the button.
 -if user_signed_in?
   %button.radius.button{:type => "submit", :id=>"submit"} Make Your Move
+  :javascript
+    $('#submit').click(function(){
+      $('#submit').remove();
+      $('#response').css("display","block");
+      $('.game-score').css('display','block');
+      $.get('/games/spot_value');
+    });
 -else
   =link_to "#", :data => { :reveal_id => 'myModal'} do
-    %button.radius.button Draw Numbers
+    %button#login-to-play.radius.button Draw Numbers
+  :javascript
+    $('#login-to-play').on('click', function() {
+      $('#myModal').foundation('reveal', 'open');
+    });
 %button.radius.button{:style=>"display:none;", :id=>"response"}
-:javascript
-  $('#submit').click(function(){
-    $('#submit').remove();
-    $('#response').css("display","block");
-    $('.game-score').css('display','block');
-    $.get('/games/spot_value');
-  });
