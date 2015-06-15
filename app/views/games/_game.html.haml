@@ -1,9 +1,9 @@
-=link_to game_path(game.id) do
+=link_to game_path(game) do
   %img{:src => "assets/#{game.logo_url}"}/
 %h4.game-title=game.title
 .game-desc
   =game.description
-=link_to game_path(game.id) do
+=link_to game_path(game) do
   %button{:type => "submit"}
     %i.fi-play
     Play #{game.title}

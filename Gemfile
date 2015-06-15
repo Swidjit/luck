@@ -27,7 +27,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem "koala", "~> 1.11.0rc"
 gem 'social-share-button'
-
+gem 'friendly_id', '~> 5.1.0'
 gem 'meta-tags'
 
 group :assets do

@@ -3,7 +3,8 @@ class Game < ActiveRecord::Base
   has_many :scores, :dependent => :delete_all
   has_many :streaks, :dependent => :delete_all
 
-
+  extend FriendlyId
+  friendly_id :title, use: :slugged
   acts_as_commentable
 
 end

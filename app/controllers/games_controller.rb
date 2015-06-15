@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   respond_to :html
   before_filter :load_resource_from_id, :except => [:index, :spot_value]
+
   require 'action_view'
 
   include ActionView::Helpers::DateHelper
@@ -16,7 +17,7 @@ class GamesController < ApplicationController
       #get all games user is eligible to play
       @eligible_games = [1,2,3,4]
       @eligibility_times = []
-      for i in 1..3
+      for i in 1..4
         s = current_user.scores.where('game_id=? and created_at >= ?',i, 1.hours.ago).first
         if s.present?
           @eligible_games.delete(i)
@@ -95,6 +96,7 @@ class GamesController < ApplicationController
   end
 
   def load_resource_from_id
-    @game = Game.find(params[:id])
+    @game = Game.friendly.find(params[:id])
   end
+
 end
