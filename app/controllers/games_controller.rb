@@ -35,7 +35,11 @@ class GamesController < ApplicationController
   end
 
   def init_score
-    @score = Score.new(:game=>@game, :user=>current_user, :value=>-1)
+    if user_signed_in?
+      @score = Score.new(:game=>@game, :user=>current_user, :value=>-1)
+    else
+      @score = Score.new(:game=>@game, :session_id=>params[:session_id], :value=>-1)
+    end
     @score.save
     @score.value = -1
     if @score.save
@@ -46,24 +50,30 @@ class GamesController < ApplicationController
   end
 
   def save_score
-    @score = Score.where(:game=>@game, :user=>current_user, :value=>-1).last
+    if user_signed_in?
+      @score = Score.where(:game=>@game, :user=>current_user, :value=>-1).last
+      @score.value = params[:score]
+      if @score.save!
+        @game.increment!(:plays)
+        @game_stat = GameStat.where(:game_id => @score.game.id, :user_id => current_user.id).first
+        if @game_stat.present?
+          new_score = @game_stat.total + @score.value
+          play_count = @game_stat.plays + 1
+          new_avg = new_score/play_count.to_f
+          @game_stat.assign_attributes(:total=> new_score, :plays => play_count, :avg => new_avg)
+        else
+          @game_stat = GameStat.new(:total=> @score.value, :plays => 1, :avg => @score.value, :user_id => @score.user.id, :game_id => @score.game.id)
+        end
+        @game_stat.save
 
-    @score.value = params[:score]
-    if @score.save!
-      @game.increment!(:plays)
-      @game_stat = GameStat.where(:game_id => @score.game.id, :user_id => current_user.id).first
-      if @game_stat.present?
-        new_score = @game_stat.total + @score.value
-        play_count = @game_stat.plays + 1
-        new_avg = new_score/play_count.to_f
-        @game_stat.assign_attributes(:total=> new_score, :plays => play_count, :avg => new_avg)
-      else
-        @game_stat = GameStat.new(:total=> @score.value, :plays => 1, :avg => @score.value, :user_id => @score.user.id, :game_id => @score.game.id)
+
       end
-      @game_stat.save
-
-
+    else
+      @score = Score.where(:game=>@game, :session_id=>params[:session_id], :value=>-1).last
+      @score.value = params[:score]
+      @score.save!
     end
+
   end
 
   def spot_value

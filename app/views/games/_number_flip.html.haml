@@ -11,35 +11,29 @@
             %p
               %span.details
                 =v
--if user_signed_in?
 
-  :javascript
-      var game_id = 2;
-      var flip_count = 0;
-      var score = 0;
-       $('.flip-container').on('click', function() {
-          if(flip_count < 3) {
-            $(this).children().addClass('flipped');
-            flip_count++;
-            score += parseInt($(this).attr('value'));
-            $('.score-value').text(score);
-            if(flip_count == 1) {
-              $.get('/games/'+game_id+'/init_score');
-            }
 
-            if(flip_count == 3) {
-              var data = {
-                score: score
-              }
-              $.post('/games/'+game_id+'/save_score', data);
-
-            }
+:javascript
+    var game_id = 2;
+    var flip_count = 0;
+    var score = 0;
+     $('.flip-container').on('click', function() {
+        if(flip_count < 3) {
+          $(this).children().addClass('flipped');
+          flip_count++;
+          score += parseInt($(this).attr('value'));
+          $('.score-value').text(score);
+          if(flip_count == 1) {
+            $.get('/games/'+game_id+'/init_score?session_id='+$.cookie('session_id'));
           }
-        });
 
--else
+          if(flip_count == 3) {
+            var data = {
+              score: score,
+              session_id: $.cookie('session_id')
+            }
+            $.post('/games/'+game_id+'/save_score', data);
 
-  :javascript
-    $('.flip-container').on('click', function() {
-      $('#myModal').foundation('reveal', 'open');
-    });
+          }
+        }
+      });

@@ -1,12 +1,14 @@
 %h3.centered welcome to good luck
 .login-form
-
-	= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-		%div
-			= f.label :login
-			= f.email_field :login, autofocus: true
-		%div
-			= f.label :password
-			= f.password_field :password, autocomplete: "off"
-		%div= f.submit "Sign in", :class => "button"
+  =form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    =f.hidden_field :session_id, :value=> "dfgd", :id => "session-id"
+    %div
+      = f.label :login
+      = f.email_field :login, autofocus: true
+    %div
+      = f.label :password
+      = f.password_field :password, autocomplete: "off"
+    %div= f.submit "Sign in", :class => "button"
 .centered= render "devise/shared/links"
+:javascript
+  $('#session-id').val($.cookie("session_id"));

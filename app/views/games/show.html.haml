@@ -33,9 +33,9 @@
             -case @game.id
             -when 1
               =render :partial => 'lottery'
-            -when 2
-              =render :partial => 'number_flip'
             -when 3
+              =render :partial => 'number_flip'
+            -when 2
               =render :partial => 'spot_in_time'
             -when 4
               =render :partial => 'press_on'
@@ -97,7 +97,9 @@
   %h2 You are not signed in
   %p.lead You'll need to register to participate
   =link_to new_user_session_path do
-    %button.radius.button Login/Signup
+    %button.radius.button Login
+  =link_to new_user_registration_path do
+    %button.radius.button Signup
   %a.close-reveal-modal ×
 -if user_signed_in?
   #gameComplete.reveal-modal{"data-reveal" => ""}
@@ -112,7 +114,22 @@
     -else
       %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
     %a.close-reveal-modal ×
+-else
+  #gameComplete.reveal-modal{"data-reveal" => ""}
+    .green{:style =>"padding: 4px 15px 1px; margin: 0 10px 12px 0;"}
 
+      %h4{:style=>"font-size:: 25px;"}
+        You are playing as a guest.  Login now and we will save your score to your new account and you can start tracking your luck.
+        .score-value 0
+      =link_to new_user_session_path do
+        %button.radius.button Login
+      =link_to new_user_registration_path do
+        %button.radius.button Signup
+
+    %h5 Or, try out other games as a guest:
+    -@eligible_games = Game.all
+    =render :partial => 'eligible_games'
+    %a.close-reveal-modal ×
 
 :javascript
   $(document).on('ready page:load', function(){

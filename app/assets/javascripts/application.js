@@ -20,7 +20,11 @@
 
 $(function(){ $(document).foundation(); });
 $(document).on('ready', function(){
-
+	if ($.cookie('session_id')==undefined) {
+		var id = parseInt(Math.random()*1000000000);
+		$.cookie('session_id', id, { expires: 1 });
+	}
+	else console.log($.cookie('session_id'));
 	$("#play").show();
 	$("#user-menu-icon").show();
 	$("#play").hover(

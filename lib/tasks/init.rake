@@ -1,6 +1,7 @@
 namespace :init do
 
   task :games => :environment do
+    Game.delete_all
     @game = Game.new(:title => "Lottery",:description => "Choose 5 numbers for your lottery ticket.  Score points depending on how many matches you make.", :expected_score => 1.033, :avg => 0, :plays=>0, :logo_url => "dummy.png")
     @game.save
     @game = Game.new(:title => "Next in Line",:description => "Wait until the perfect moment to take your place in line and get a score based on your position", :expected_score => 3, :avg => 0, :plays=>0, :logo_url => "spot-in-time.png")
