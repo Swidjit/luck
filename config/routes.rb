@@ -19,5 +19,5 @@ Rails.application.routes.draw do
   root :to => 'pages#home'
   get 'pages/:page_name' => 'pages#index', :as => :pages
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-
+  get 'sitemap.xml' => 'sitemap#index', as: 'sitemap', defaults: { format: 'xml' }
 end

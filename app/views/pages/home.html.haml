@@ -10,7 +10,7 @@
   .large-12.columns
     %h3 Luck.
     %h4 Some claim theirs is good.  Others say theirs is bad.  Many say it does not or cannot exist.  It's time to find out the truth.
-    %p These 3 "games" of chance will test your luck and see how it compares to the rest of the world.  Come back once every 4 hours to try your luck again.
+    %p These 4 "games" of chance will test your luck and see how it compares to the rest of the world.  Is it your lucky day, or are you mired in a slump of bad luck? Come back as often as each hour to try your luck again and find out how lucky you are.
     %hr
 .row
   -Game.all.each do |game|
@@ -19,27 +19,43 @@
 
 .row
   .large-12.columns
-    .panel
-      %h4 Spread the word!
-      .row
-        .large-7.columns
-          %p The more people playing, the better. Plus, games are better with friends, so please share widely!
-          =social_share_button_tag("How Lucky Are You?")
 
-        .large-5.columns
-          .stats-box
-            %h3 luckiest players - all time
-            -User.all.order(score: :desc).limit(10).each do |s|
+    .row
+      .large-7.columns
+        %h4 Spread the word!
+        The more people playing, the better. Plus, games are better with friends, so please share widely!
+        =social_share_button_tag("How Lucky Are You?")
+        %br
+        %h4 Learn a little more
+        %ul
+          %li
+            =link_to "Concept overview", pages_path("overview")
+          %li
+            =link_to "How your luck is scored", pages_path("how_it_works")
+          %li
+            =link_to "Possible outcomes", pages_path("outcomes")
+
+        %h4 Have some fun with luck
+        %ul
+          %li
+            =link_to "Luck expressions", pages_path("luck_expressions")
+          %li
+            =link_to "Theories on luck & chance", pages_path("theories_on_luck")
+      .large-5.columns
+        %h4 Luckiest Players
+        .stats-box
+          %h3 all time
+          -User.all.order(score: :desc).limit(10).each do |s|
+            .stat-label=s.username
+            .stat-data=s.score.round(1)
+            .clear
+        .stats-box
+          %h3 today
+          -@todays_luckiest.each do |s|
+            -if s.present?
               .stat-label=s.username
-              .stat-data=s.score.round(1)
-              .clear
-          .stats-box
-            %h3 luckiest players - today
-            -@todays_luckiest.each do |s|
-              -if s.present?
-                .stat-label=s.username
 
-                .clear
+              .clear
 :javascript
   $(document).on('ready page:load', function(){
       window.fbAsyncInit = function() {
