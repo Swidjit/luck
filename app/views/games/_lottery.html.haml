@@ -7,14 +7,14 @@
   #spinner_04.spinner.ridged.white_shadow.shadow{:value => "8"}
   #spinner_05.spinner.ridged.white_shadow.shadow{:value => "8"}
 .clear
--if user_signed_in?
-  %button.radius.button{:type => "submit", :id=>"submit-lottery"} Draw Numbers
-  :javascript
-    $(document).on('ready page:load', function(){
-      var game_id = 1;
+%button.radius.button{:type => "submit", :id=>"submit-lottery"} Draw Numbers
+:javascript
+  $(document).on('ready page:load', function(){
+    var game_id = 1;
+    if(eligible == "true") {
       $('#submit-lottery').click(function(){
         $(this).remove();
-        $.get('/games/'+game_id+'/init_score');
+        $.get('/games/'+game_id+'/init_score?session_id='+$.cookie('session_id'));
         var guesses = [];
         var answers = [];
         var nums = $('#entry').children();
@@ -57,22 +57,23 @@
                   if(matches==0) score = 0;
                   var data = {
                     score: score,
-                    score_id: $('.game-score').attr('id')
+                    score_id: $('.game-score').attr('id'),
+                    session_id: $.cookie('session_id')
                   }
                   $.post('/games/'+game_id+'/save_score', data);
              }
 
-        }
-      });
-    });
+          }
 
--else
-  =link_to "#", :data => { :reveal_id => 'myModal'} do
-    %button#login-to-play.radius.button Draw Numbers
-  :javascript
-    $('#login-to-play').on('click', function() {
-      $('#myModal').foundation('reveal', 'open');
-    });
+      });
+    }
+    else {
+      $('#submit-lottery').click(function(){
+        $('#ineligible').foundation("reveal","open");
+      });
+    }
+  });
+
 #entry
   .lottery.red
     %span

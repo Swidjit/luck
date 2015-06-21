@@ -1,3 +1,5 @@
+:javascript
+  var eligible = '#{@game_eligibility}';
 -content_for :head do
   %title #{@game.title} | A Luck Test
   %meta{:content => "#{@game.title} | A Luck Test", :property => "og:title"}
@@ -131,8 +133,19 @@
     =render :partial => 'eligible_games'
     %a.close-reveal-modal ×
 
+#ineligible.reveal-modal{"data-reveal" => ""}
+  %p You are not eligible to play #{@game.title} again until #{@eligibility_times[@game.id]}
+  -if @eligible_games.size > 1
+    %h5 You are currently elibile to play:
+    =render :partial => 'eligible_games'
+  -else
+    %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
+  %a.close-reveal-modal ×
+
 :javascript
   $(document).on('ready page:load', function(){
+
+    console.log(eligible);
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '1522911697961808',

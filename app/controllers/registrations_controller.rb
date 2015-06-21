@@ -1,7 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
     super
-    print "heyeyeye"
     if resource.save
       @user_scores = Score.where(:session_id => params[:user][:session_id])
       @user_scores.each do |o|

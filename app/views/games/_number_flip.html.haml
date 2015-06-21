@@ -14,26 +14,31 @@
 
 
 :javascript
-    var game_id = 2;
+    var game_id = 3;
     var flip_count = 0;
     var score = 0;
      $('.flip-container').on('click', function() {
-        if(flip_count < 3) {
-          $(this).children().addClass('flipped');
-          flip_count++;
-          score += parseInt($(this).attr('value'));
-          $('.score-value').text(score);
-          if(flip_count == 1) {
-            $.get('/games/'+game_id+'/init_score?session_id='+$.cookie('session_id'));
-          }
-
-          if(flip_count == 3) {
-            var data = {
-              score: score,
-              session_id: $.cookie('session_id')
+        if(eligible == "true") {
+          if(flip_count < 3) {
+            $(this).children().addClass('flipped');
+            flip_count++;
+            score += parseInt($(this).attr('value'));
+            $('.score-value').text(score);
+            if(flip_count == 1) {
+              $.get('/games/'+game_id+'/init_score?session_id='+$.cookie('session_id'));
             }
-            $.post('/games/'+game_id+'/save_score', data);
 
+            if(flip_count == 3) {
+              var data = {
+                score: score,
+                session_id: $.cookie('session_id')
+              }
+              $.post('/games/'+game_id+'/save_score', data);
+
+            }
           }
+        }
+        else {
+          $('#ineligible').foundation("reveal","open");
         }
       });

@@ -3,13 +3,14 @@
   -@vals = [0,0,0,1,1,1,5,5,5,10,10,10,25,25,25,50].shuffle
   -@vals.each do |f|
     =render :partial =>  'grid_piece', :locals => {val:f}
--if user_signed_in?
-  %button{:id => "press"} Press On
-  :javascript
-    var game_id = 4;
-    var final_value;
-    var score = 0;
-    var item;
+
+%button{:id => "press"} Press On
+:javascript
+  var game_id = 4;
+  var final_value;
+  var score = 0;
+  var item;
+  if(eligible == "true") {
     $('#press').on('click', function() {
       if (typeof item !== 'undefined') {
         item.find('span').text('0');
@@ -22,14 +23,15 @@
               if(final_value == 0) {
 
                 var data = {
-                  score: score
+                  score: score,
+                  session_id: $.cookie('session_id')
                 }
                 $.post('/games/'+game_id+'/save_score', data);
 
               }
               else {
                 if(score == 0) {
-                  $.get('/games/'+game_id+'/init_score');
+                  $.get('/games/'+game_id+'/init_score?session_id='+$.cookie('session_id'));
                 }
                 score += final_value;
                 $('.score-value').text(score);
@@ -48,29 +50,29 @@
       }, 400);
 
     });
-
-    function shuffle(array) {
-      var m = array.length, t, i;
-
-      // While there remain elements to shuffle…
-      while (m) {
-
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-
-        // And swap it with the current element.
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-      }
-
-      return array;
-    }
--else
-  =link_to "#", :data => { :reveal_id => 'myModal'} do
-    %button#login-to-play.radius.button Press On
-  :javascript
-    $('#login-to-play').on('click', function() {
-      $('#myModal').foundation('reveal', 'open');
+  }
+  else {
+    $('#press').on('click', function() {
+      $('#ineligible').foundation("reveal","open");
     });
+  }
+
+  function shuffle(array) {
+    var m = array.length, t, i;
+
+    // While there remain elements to shuffle…
+    while (m) {
+
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+
+    return array;
+  }
+
 
