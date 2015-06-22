@@ -80,6 +80,19 @@ class GamesController < ApplicationController
         end
         @game_stat.save
 
+        require 'descriptive_statistics'
+        data = Score.where('game_id = ? and created_at > ?', @game.id, Time.now-6.hours).collect(&:value)
+        dev = data.standard_deviation
+        puts dev
+        score_diff = @score.value - data.mean
+        puts score_diff
+        num_devs = score_diff/dev.to_f
+        puts num_devs
+        @stat_score = 500 + (100*num_devs).to_i
+        @percentile = data.percentile_rank(@score.value).to_i
+        puts @stat_score
+        puts @percentile
+
 
       end
     else

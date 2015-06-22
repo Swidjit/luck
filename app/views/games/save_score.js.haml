@@ -1,5 +1,11 @@
 $('.score-value').html('#{@score.value}');
 $('.score-label').html('Score Saved:');
+$('.score-raw').html('#{@score.value}');
+$('.score-relative').html('#{@stat_score}');
+$('.score-percentile').html('#{@percentile}');
+$('.average-score-raw').html('#{@score.value}');
+$('.average-score-relative').html('#{@stat_score}');
+$('.average-score-percentile').html('#{@percentile}');
 $('.game-score').css('background-color','#A3D39C');
 $('#gameComplete').foundation('reveal', 'open');
 eligible = "false";

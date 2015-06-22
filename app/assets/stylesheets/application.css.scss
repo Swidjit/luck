@@ -221,12 +221,31 @@ font-size: 20px;
   }
 
 }
+
+.results {
+  label {
+    width: 31%;
+    padding: 0 1%;
+    display: inline-block;
+    text-align:center;
+  }
+}
+
+.score-raw,.score-relative, .score-percentile {
+  width: 31%;
+  padding: 0 1%;
+  display: inline-block;
+  text-align:center;
+  font-size: 22px;
+  color: blue;
+}
 /* comments */
 
 .comment {
   position: relative;
   text-align: left;
   margin-bottom: 3px;
+
 }
 
 

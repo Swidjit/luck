@@ -107,11 +107,15 @@
   #gameComplete.reveal-modal{"data-reveal" => ""}
     .green{:style =>"padding: 4px 15px 1px; margin: 0 10px 12px 0;"}
 
-      %h4{:style=>"font-size:: 25px;"}
-        Your score has been saved:
-        .score-value 0
+      .results
+        %label score
+        %label normalized score
+        %label score percentile
+        .score-raw
+        .score-relative
+        .score-percentile
     -if @eligible_games.size > 1
-      %h5 You are also currently elibile to play:
+      %h5 Your score has been saved. You are also currently elibile to play:
       =render :partial => 'eligible_games'
     -else
       %h5 You are not eligible to play any further games at the moment. Come back in an hour to play again.
