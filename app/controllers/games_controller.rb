@@ -83,15 +83,21 @@ class GamesController < ApplicationController
         require 'descriptive_statistics'
         data = Score.where('game_id = ? and created_at > ?', @game.id, Time.now-6.hours).collect(&:value)
         dev = data.standard_deviation
-        puts dev
+
         score_diff = @score.value - data.mean
-        puts score_diff
+
         num_devs = score_diff/dev.to_f
-        puts num_devs
         @stat_score = 500 + (100*num_devs).to_i
         @percentile = data.percentile_rank(@score.value).to_i
-        puts @stat_score
-        puts @percentile
+        streak = current_user.streaks.where(:game_id => @game.id).first
+        if streak.streak >= 2
+          if streak.direction == "good"
+            @streak_msg = "That's #{streak.streak} consecutive above average performances!"
+          else
+            @streak_msg = "That's #{streak.streak} consecutive below average performances :("
+          end
+
+        end
 
 
       end
