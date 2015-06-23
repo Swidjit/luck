@@ -1,0 +1,10 @@
+.row
+  .large-12.columns
+
+    %h2.centered Forgot your password?
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'login-form', method: :post }) do |f|
+      = devise_error_messages!
+      %div
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      %div= f.submit "Send me reset password instructions", :class => "button"
