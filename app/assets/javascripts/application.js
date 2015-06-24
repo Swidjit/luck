@@ -25,7 +25,6 @@ $(document).on('ready', function(){
 		$.cookie('session_id', id, { expires: 1 });
 	}
 	else console.log($.cookie('session_id'));
-	$("#play").show();
 	$("#user-menu-icon").show();
 	$("#play").hover(
     	function() {

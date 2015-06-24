@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    member do
+      get 'stats'
+    end
+  end
 
   resources :comments, :only => [:create, :destroy]
 

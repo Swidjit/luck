@@ -39,7 +39,11 @@ namespace :stats do
         end
       end
     end
-
+    User.all.each do |user|
+      user.score = Ranking.where(:user => user).average(:score)
+      user.percentile = Ranking.where(:user => user).average(:percentile)
+      user.save
+    end
 
   end
 end

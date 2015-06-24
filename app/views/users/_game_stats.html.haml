@@ -1,0 +1,19 @@
+.row
+  .large-12.columns
+    %h4=game.title
+    -ranking = current_user.rankings.where(:game_id=>game.id).first
+    -if ranking.present?
+      .stat
+        %label adjusted score
+        %span=ranking.score
+      .stat
+        %label percentile
+        %span=ranking.percentile
+    -game_stat = current_user.game_stats.where(:game_id=>game.id).first
+    -if game_stat.present?
+      .stat
+        %label plays
+        %span=game_stat.plays
+      .stat
+        %label average raw score
+        %span=game_stat.avg.round(2)

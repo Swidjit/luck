@@ -1,0 +1,15 @@
+.row
+  .large-6.columns
+    %h3 Overall Luck Performance
+    .stat
+      %label adjusted overall score
+      %span=current_user.score.round(2)
+    .stat
+      %label overall percentile
+      %span=current_user.percentile.round(2)
+    .stat
+      %label game played
+      %span=current_user.game_stats.sum(:plays)
+  .large-6.columns
+    -Game.all.each do |game|
+      =render :partial => 'users/game_stats', :locals => {game: game}

@@ -32,6 +32,9 @@
             .game-listing
               =link_to destroy_user_session_path, :method => 'delete' do
                 logout
+            .game-listing
+              =link_to stats_user_path(current_user) do
+                stats
     -else
       %ul.right
         %li.has-form{:style => 'padding-right: 3px !important;'}

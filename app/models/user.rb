@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :scores, :dependent => :delete_all
   has_many :streaks, :dependent => :delete_all
+  has_many :rankings, :dependent => :delete_all
+  has_many :game_stats, :dependent => :delete_all
 
   attr_accessor :login
 
