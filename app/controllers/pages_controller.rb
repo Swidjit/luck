@@ -11,11 +11,12 @@ class PagesController < ApplicationController
         redirect_to finish_signup_path(current_user)
       end
     end
+
     @todays_luckiest = []
-    @game1_scores = Score.where('updated_at > ? and game_id=1', Time.now-24.years).order(value: :asc).take(3)
-    @game2_scores = Score.where('updated_at > ? and game_id=2', Time.now-24.years).order(value: :asc).take(3)
-    @game3_scores = Score.where('updated_at > ? and game_id=3', Time.now-24.years).order(value: :asc).take(3)
-    @game4_scores = Score.where('updated_at > ? and game_id=4', Time.now-24.years).order(value: :asc).take(3)
+    @game1_scores = Score.where('updated_at > ? and game_id=1', Time.now-24.hours).order(value: :asc).take(3)
+    @game2_scores = Score.where('updated_at > ? and game_id=2', Time.now-24.hours).order(value: :asc).take(3)
+    @game3_scores = Score.where('updated_at > ? and game_id=3', Time.now-24.hours).order(value: :asc).take(3)
+    @game4_scores = Score.where('updated_at > ? and game_id=4', Time.now-24.hours).order(value: :asc).take(3)
 
     @todays_luckiest << @game1_scores[0].user if !@game1_scores[0].nil?
     @todays_luckiest << @game2_scores[0].user if !@game2_scores[0].nil?

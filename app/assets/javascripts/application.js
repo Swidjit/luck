@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
+
 //= require_tree .
 //= require spinner
 //= require social-share-button
