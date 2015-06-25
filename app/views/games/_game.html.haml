@@ -1,5 +1,5 @@
 =link_to game_path(game) do
-  %img{:src => "assets/#{game.logo_url}"}/
+  =image_tag(game.logo_url)
 %h4.game-title=game.title
 .game-desc
   =game.description
