@@ -19,14 +19,14 @@
   .small-12.medium-4.large-4.columns
     .stats-box
       %h3 hottest players
-      -Streak.where(:game_id=>0).order(streak: :desc).limit(10).each do |s|
+      -Streak.where(:game_id=>0, :direction => "good").order(streak: :desc).limit(10).each do |s|
         .stat-label=s.user.username
         .stat-data=s.streak
         .clear
   .small-12.medium-4.large-4.columns
     .stats-box
       %h3 coldest players
-      -Streak.where(:game_id=>0).order(streak: :asc).limit(10).each do |s|
+      -Streak.where(:game_id=>0, :direction => "bad").order(streak: :asc).limit(10).each do |s|
         .stat-label=s.user.username
         .stat-data=s.streak
         .clear

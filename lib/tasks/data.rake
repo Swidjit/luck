@@ -40,7 +40,7 @@ namespace :data do
     values.each do |v|
       SpotValue.create(:value=>v)
     end
-    game = Game.find(3)
+    game = Game.find(2)
     game.expected_score = user_count.to_f/2
     game.save
   end
