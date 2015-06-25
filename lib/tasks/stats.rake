@@ -42,6 +42,8 @@ namespace :stats do
     User.all.each do |user|
       user.score = Ranking.where(:user => user).average(:score)
       user.percentile = Ranking.where(:user => user).average(:percentile)
+      user.score = 0 if user.score.nil?
+      user.percentile = 0 if user.percentile.nil?
       user.save
     end
 
