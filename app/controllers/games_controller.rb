@@ -35,9 +35,6 @@ class GamesController < ApplicationController
         end
       end
     end
-    puts 'jhey'
-    puts @eligible_games
-    puts @game.id
     # for card flip game
     @values = (0..20).to_a.shuffle
     @game_eligibility = @eligible_games.include?(@game.id)
@@ -81,11 +78,9 @@ class GamesController < ApplicationController
         @game_stat.save
 
         require 'descriptive_statistics'
-        data = Score.where('game_id = ? and created_at > ?', @game.id, Time.now-6.hours).collect(&:value)
+        data = Score.where('game_id = ? and created_at > ?', @game.id, Time.now-1.month).collect(&:value)
         dev = data.standard_deviation
-
         score_diff = @score.value - data.mean
-
         num_devs = score_diff/dev.to_f
         @stat_score = 500 + (100*num_devs).to_i
         @percentile = data.percentile_rank(@score.value).to_i
